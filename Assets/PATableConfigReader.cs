@@ -12,7 +12,8 @@ public class PATableConfigReader : MonoBehaviour {
         PATable = new string[lines.Length][];
         for (int i = 0; i < lines.Length; i++) {
             string[] line = lines[i].Split(' ');
-            PATable[i][line.Length] = line;
+            PATable[i] = new string[line.Length];
+            PATable[i] = line;
         }
     }
 
