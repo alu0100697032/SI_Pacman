@@ -5,28 +5,31 @@ public class MovesSecuence : MonoBehaviour {
 
     public GameObject maze;
     public float speed;
+    int stepSecuence = 0;
     int[] vecinos = new int[4];
     int[] vecinosAux;
-    Vector2 dest = Vector2.zero;
-    Vector2 position = Vector2.zero;
-    string[] secuence = {"RIGHT","UP","LEFT", "UP"};
-    int stepSecuence = 0;
-    // Use this for initialization
+    string[] secuence;
+    private Vector2 dest = Vector2.zero;
+    private Vector2 position = Vector2.zero;
+    
     void Start()
     {
+        secuence = GetComponent<MoveSecuenceConfigReader>().getSecuence();
         dest = (Vector2)transform.localPosition;
         position = dest;
         vecinos = maze.GetComponent<nivel>().getVecinos((int)position.x, (int)position.y);
         vecinosAux = vecinos;
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
+        //Si se encuentra en un cruce cambia al siguiente movimiento de la secuencia
         if (cruce())
             stepSecuence++;
         if (stepSecuence >= secuence.Length)
             stepSecuence = 0;
+
+        //Fija el destino del pacman
         if (secuence[stepSecuence] == "UP" && vecinos[0] == 1)
         {
             //Debug.Log("Posicion pacman: " + position);
@@ -50,27 +53,26 @@ public class MovesSecuence : MonoBehaviour {
             dest = position - Vector2.right;
             vecinosAux[3] = -1;
         }
-        else {
 
-        }
-
+        //Mueve el pacman teniendo en cuenta la velocidad
         float step = speed * Time.deltaTime;
         Vector2 dest2 = Vector2.MoveTowards(transform.localPosition, dest, step);
         transform.localPosition = dest2;
-
+        //Si ya ha llegado al destino actualiza los vecinos (solo en las posiciones enteras)
         if ((dest2.x == position.x + 1) || (dest2.x == position.x - 1) || (dest2.y == position.y + 1) || (dest2.y == position.y - 1))
         {
             position = dest;
+            GetComponent<nivel>().eliminarPastilla((int)position.x, (int)position.y);
             vecinos = maze.GetComponent<nivel>().getVecinos((int)position.x, (int)position.y);
             vecinosAux = vecinos;
         }
         
-        // Animation Parameters
+        // Anima al pacman
         Vector2 dir = dest - (Vector2)transform.localPosition;
         GetComponent<Animator>().SetFloat("DirX", dir.x);
         GetComponent<Animator>().SetFloat("DirY", dir.y);
     }
-
+    //Devuelve true si se encuentra en un cruce
     public bool cruce() {
         int aux = 0;
         for (int i = 0; i < vecinosAux.Length; i++) {
@@ -82,7 +84,7 @@ public class MovesSecuence : MonoBehaviour {
         else
             return false;
     }
-
+    //Devuelve true si se encuentra en una esquina
     public bool esquina() {
         if (vecinos[0] == -1 && vecinos[1] == -1)
             return true;
