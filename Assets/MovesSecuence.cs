@@ -62,7 +62,7 @@ public class MovesSecuence : MonoBehaviour {
         if ((dest2.x == position.x + 1) || (dest2.x == position.x - 1) || (dest2.y == position.y + 1) || (dest2.y == position.y - 1))
         {
             position = dest;
-            GetComponent<nivel>().eliminarPastilla((int)position.x, (int)position.y);
+            maze.GetComponent<nivel>().eliminarPastilla((int)position.x, (int)position.y);
             vecinos = maze.GetComponent<nivel>().getVecinos((int)position.x, (int)position.y);
             vecinosAux = vecinos;
         }
