@@ -15,13 +15,12 @@ public class PATableConfigReader : MonoBehaviour {
             PATable[i] = new string[line.Length];
             PATable[i] = line;
         }
-
+        
         for (int i = 0; i < PATable.Length; i++) {
             string linea = "";
             for (int j = 0; j < PATable[i].Length; j++) {
-                linea += PATable[i][j] + " ";
+                linea += PATable[i][j] + ",";
             }
-            Debug.Log(linea);
         }
     }
 

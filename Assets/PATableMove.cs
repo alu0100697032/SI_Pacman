@@ -27,13 +27,13 @@ public class PATableMove : MonoBehaviour {
             for (int j = 0; j < PATable[i].Length; j++) {
                 if (j == PATable[i].Length - 1)
                 {
-                    if (PATable[i][j] == "UP")
+                    if (PATable[i][j].Split()[0] == "UP")
                         dest = position + Vector2.up;
-                    else if (PATable[i][j] == "RIGHT")
+                    if (PATable[i][j].Split()[0] == "RIGHT")
                         dest = position + Vector2.right;
-                    else if (PATable[i][j] == "DOWN")
+                    if (PATable[i][j].Split()[0] == "DOWN")
                         dest = position - Vector2.up;
-                    else if (PATable[i][j] == "LEFT")
+                    if (PATable[i][j].Split()[0] == "LEFT")
                         dest = position - Vector2.right;
                     stop = true;
                 }
@@ -53,7 +53,7 @@ public class PATableMove : MonoBehaviour {
 
             }
         }
-
+       
         //Mueve el pacman teniendo en cuenta la velocidad
         float step = speed * Time.deltaTime;
         Vector2 dest2 = Vector2.MoveTowards(transform.localPosition, dest, step);
