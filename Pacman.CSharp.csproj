@@ -69,11 +69,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\GhostMove.cs" />
+    <Compile Include="Assets\MoveSecuenceConfigReader.cs" />
     <Compile Include="Assets\MovesSecuence.cs" />
+    <Compile Include="Assets\PATableConfigReader.cs" />
+    <Compile Include="Assets\PATableMove.cs" />
     <Compile Include="Assets\Pacdot.cs" />
     <Compile Include="Assets\PacmanMove.cs" />
     <Compile Include="Assets\nivel.cs" />
     <Compile Include="Assets\simpleMovement.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Config\PATableConfig.txt" />
+    <None Include="Assets\Config\moveSecuenceConfig.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
