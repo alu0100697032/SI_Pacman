@@ -62,7 +62,10 @@ public class PATableMove : MonoBehaviour {
         if ((dest2.x == position.x + 1) || (dest2.x == position.x - 1) || (dest2.y == position.y + 1) || (dest2.y == position.y - 1))
         {
             position = dest;
-            maze.GetComponent<nivel>().eliminarPastilla((int)position.x, (int)position.y);
+            if (maze.GetComponent<nivel>().hayPastilla((int)position.x, (int)position.y)) {
+                maze.GetComponent<nivel>().eliminarPastilla((int)position.x, (int)position.y);
+                GetComponent<pacmanLogic>().scoreUp(10);
+            }
             vecinos = maze.GetComponent<nivel>().getVecinos((int)position.x, (int)position.y);
         }
 

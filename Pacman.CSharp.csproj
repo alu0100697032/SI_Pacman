@@ -76,6 +76,7 @@
     <Compile Include="Assets\Pacdot.cs" />
     <Compile Include="Assets\PacmanMove.cs" />
     <Compile Include="Assets\nivel.cs" />
+    <Compile Include="Assets\pacmanLogic.cs" />
     <Compile Include="Assets\simpleMovement.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -68,4 +68,11 @@ public class nivel : MonoBehaviour {
     public void eliminarPastilla(int x, int y) {
         maze[x, y] = 0;
     }
+
+    public bool hayPastilla(int x, int y) {
+        if (maze[x, y] == 1)
+            return true;
+        else
+            return false;
+    }
 }
