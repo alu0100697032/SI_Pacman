@@ -8,6 +8,8 @@ public class AStarMove : MonoBehaviour {
     int[] vecinos = new int[4];
     private Vector2 dest = Vector2.zero;
     private Vector2 position = Vector2.zero;
+    private ArrayList openList;
+    private ArrayList closedList;
 
     void Start()
     {
@@ -15,6 +17,7 @@ public class AStarMove : MonoBehaviour {
         position = dest;
         vecinos = maze.GetComponent<nivel>().getVecinos((int)position.x, (int)position.y);
     }
+
 
     void FixedUpdate()
     {
@@ -40,5 +43,21 @@ public class AStarMove : MonoBehaviour {
         Vector2 dir = dest - (Vector2)transform.localPosition;
         GetComponent<Animator>().SetFloat("DirX", dir.x);
         GetComponent<Animator>().SetFloat("DirY", dir.y);
+    }
+
+    public void aStar(Vector2 start, Vector2 goal)
+    {
+        closedList = new ArrayList();     	  // The set of nodes already evaluated.
+        openList = new ArrayList();// The set of tentative nodes to be evaluated, initially containing the start node
+        openList.Add(start);
+
+        while (openList.Capacity != 0) {
+
+        }
+    }
+
+    public int manhattan()
+    {
+        return 0;
     }
 }
