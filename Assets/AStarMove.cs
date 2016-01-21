@@ -8,17 +8,25 @@ public class AStarMove : MonoBehaviour {
     int[] vecinos = new int[4];
     private Vector2 dest = Vector2.zero;
     private Vector2 position = Vector2.zero;
+
     private ArrayList openList;
     private ArrayList closedList;
 
+    
+
+    // Start
     void Start()
     {
+        Debug.Log("Start");
         dest = (Vector2)transform.localPosition;
         position = dest;
-        vecinos = maze.GetComponent<nivel>().getVecinos((int)position.x, (int)position.y);
+        //vecinos = maze.GetComponent<nivel>().getVecinos((int)position.x, (int)position.y);
+
+        FindPath(position , new Vector3(2,2,0));
     }
 
 
+    // Update
     void FixedUpdate()
     {
 
@@ -45,19 +53,84 @@ public class AStarMove : MonoBehaviour {
         GetComponent<Animator>().SetFloat("DirY", dir.y);
     }
 
-    public void aStar(Vector2 start, Vector2 goal)
+
+    // Coste heuristico del aStar
+    private static float HeuristicEstimateCost(Vector3 curNode, Vector3 goalNode)
     {
-        closedList = new ArrayList();     	  // The set of nodes already evaluated.
-        openList = new ArrayList();// The set of tentative nodes to be evaluated, initially containing the start node
-        openList.Add(start);
-
-        while (openList.Capacity != 0) {
-
-        }
+        //Vector3 vecCost = curNode.position - goalNode.position;
+        return 1; //vecCost.magnitude;
     }
 
-    public int manhattan()
+
+    public ArrayList FindPath(Vector3 start, Vector3 goal)
     {
-        return 0;
+        Debug.Log("Empezando FindPath");
+        openList = new ArrayList();
+        openList.Add(start);
+
+        //start.nodeTotalCost = 0.0f;
+        //start.estimatedCost = HeuristicEstimateCost(start, goal);
+        start.z = HeuristicEstimateCost(start, goal) + 0.0f;
+
+        closedList = new ArrayList();
+        Vector3 node = Vector3.zero;
+
+        while (openList.Count != 0)
+        {
+            Debug.Log("OpenList no vacía");
+            node = (Vector3)openList[0];
+            //Check if the current node is the goal node
+            if (node.x == goal.x && node.y == goal.y)
+            {
+                return CalculatePath(node);
+            }
+
+            //Create an ArrayList to store the neighboring nodes
+            ArrayList neighbours = new ArrayList();
+            // GridManager.instance.GetNeighbours(node, neighbours);
+
+            neighbours = maze.GetComponent<nivel>().getNeighbours((int)position.x, (int)position.y);
+            for (int i = 0; i < neighbours.Count; i++)
+            {
+                Vector3 neighbourNode = (Vector3)neighbours[i];
+                if (!closedList.Contains(neighbourNode))
+                {
+
+                    float cost = HeuristicEstimateCost(node, neighbourNode);
+                    float totalCost = /*node.nodeTotalCost*/ node.z + cost;
+
+                    float neighbourNodeEstCost = HeuristicEstimateCost(neighbourNode, goal);
+                    neighbourNode.z /*nodeTotalCost*/ = totalCost;
+                    /*neighbourNode.parent = node;*/
+                    /*neighbourNode. estimatedCost = totalCost + neighbourNodeEstCost;*/
+                    if (!openList.Contains(neighbourNode))
+                    {
+                        openList.Add(neighbourNode);
+                    }
+                }
+            }
+            //Push the current node to the closed list
+            closedList.Add(node);
+            //and remove it from openList
+            openList.Remove(node);
+        }
+        if (node.x != goal.x && node.y != goal.y)
+        {
+            Debug.LogError("Goal Not Found");
+            return null;
+        }
+        return CalculatePath(node);
+    }
+
+    private static ArrayList CalculatePath(Vector3 node)
+    {
+        ArrayList list = new ArrayList();
+        while (node != null)
+        {
+            list.Add(node);
+            //node = node.parent;
+        }
+        list.Reverse();
+        return list;
     }
 }
