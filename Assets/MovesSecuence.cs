@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class MovesSecuence : MonoBehaviour {
 
     public GameObject mazeMS;
+    public GameObject inputField;
     public float speed;
     int stepSecuence = 0;
     int[] vecinos = new int[4];
@@ -15,11 +16,7 @@ public class MovesSecuence : MonoBehaviour {
     
     void Start()
     {
-        GameObject inputFieldGo = GameObject.Find("InputFieldMS");
-        InputField inputFieldCo = inputFieldGo.GetComponent<InputField>();
-        secuence = inputFieldCo.text.Split(' ');
-               
-        //   secuence = GetComponent<MoveSecuenceConfigReader>().getSecuence();
+        secuence = inputField.GetComponent<InputField>().text.Split(' ');
         dest = (Vector2)transform.localPosition;
         position = dest;
         vecinos = mazeMS.GetComponent<nivel>().getVecinos((int)position.x, (int)position.y);
