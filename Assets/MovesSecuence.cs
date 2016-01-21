@@ -28,7 +28,6 @@ public class MovesSecuence : MonoBehaviour {
 
     void FixedUpdate()
     {
-        GetComponent<Stop>().enabled = false;
         //Si se encuentra en un cruce cambia al siguiente movimiento de la secuencia
         if (cruce())
             stepSecuence++;
