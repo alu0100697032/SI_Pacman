@@ -2,9 +2,9 @@ Mono path[0] = 'C:/Users/Dru/Documents/pacman/test1_Data/Managed'
 Mono path[1] = 'C:/Users/Dru/Documents/pacman/test1_Data/Mono'
 Mono config path = 'C:/Users/Dru/Documents/pacman/test1_Data/Mono/etc'
 PlayerConnection initialized from C:/Users/Dru/Documents/pacman/test1_Data (debug = 0)
-PlayerConnection initialized network socket : 0.0.0.0 55365
-Multi-casting "[IP] 192.168.56.1 [Port] 55365 [Flags] 2 [Guid] 1596241057 [EditorId] 2221581169 [Version] 1048832 [Id] WindowsPlayer(DESKTOP-MSLUPJD) [Debug] 0" to [225.0.0.222:54997]...
-PlayerConnection already initialized - listening to [192.168.56.1:55365]
+PlayerConnection initialized network socket : 0.0.0.0 55460
+Multi-casting "[IP] 192.168.56.1 [Port] 55460 [Flags] 2 [Guid] 3506688078 [EditorId] 2044381957 [Version] 1048832 [Id] WindowsPlayer(DESKTOP-MSLUPJD) [Debug] 0" to [225.0.0.222:54997]...
+PlayerConnection already initialized - listening to [192.168.56.1:55460]
 Initialize engine version: 5.3.1f1 (cc9cbbcc37b4)
 GfxDevice: creating device client; threaded=1
 Direct3D:
@@ -21,7 +21,7 @@ Platform assembly: C:\Users\Dru\Documents\pacman\test1_Data\Managed\UnityEngine.
 Loading C:\Users\Dru\Documents\pacman\test1_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
 Platform assembly: C:\Users\Dru\Documents\pacman\test1_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
 Loading C:\Users\Dru\Documents\pacman\test1_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-- Completed reload, in  0.262 seconds
+- Completed reload, in  0.258 seconds
 Platform assembly: C:\Users\Dru\Documents\pacman\test1_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\Users\Dru\Documents\pacman\test1_Data\Managed\System.dll (this message is harmless)
 <RI> Initializing input.
@@ -29,24 +29,42 @@ XInput1_3.dll not found. Trying XInput9_1_0.dll instead...
 <RI> Input initialized.
 desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
 <RI> Initialized touch support.
-UnloadTime: 1.103558 ms
-NullReferenceException: Object reference not set to an instance of an object
-  at AStarMove.Start () [0x00022] in C:\Users\Dru\Documents\pacman\Assets\AStarMove.cs:18 
+UnloadTime: 1.692978 ms
+LEFT
+UnityEngine.DebugLogHandler:Internal_Log(LogType, String, Object)
+UnityEngine.DebugLogHandler:LogFormat(LogType, Object, String, Object[])
+UnityEngine.Logger:Log(LogType, Object)
+UnityEngine.Debug:Log(Object)
+MovesSecuence:Start() (at C:\Users\Dru\Documents\pacman\Assets\MovesSecuence.cs:23)
  
-(Filename: C:/Users/Dru/Documents/pacman/Assets/AStarMove.cs Line: 18)
+(Filename: C:/Users/Dru/Documents/pacman/Assets/MovesSecuence.cs Line: 23)
 
-NullReferenceException: Object reference not set to an instance of an object
-  at AStarMove.Start () [0x00022] in C:\Users\Dru\Documents\pacman\Assets\AStarMove.cs:18 
+DOWN
+UnityEngine.DebugLogHandler:Internal_Log(LogType, String, Object)
+UnityEngine.DebugLogHandler:LogFormat(LogType, Object, String, Object[])
+UnityEngine.Logger:Log(LogType, Object)
+UnityEngine.Debug:Log(Object)
+MovesSecuence:Start() (at C:\Users\Dru\Documents\pacman\Assets\MovesSecuence.cs:23)
  
-(Filename: C:/Users/Dru/Documents/pacman/Assets/AStarMove.cs Line: 18)
+(Filename: C:/Users/Dru/Documents/pacman/Assets/MovesSecuence.cs Line: 23)
 
-NullReferenceException: Object reference not set to an instance of an object
-  at AStarMove.Start () [0x00022] in C:\Users\Dru\Documents\pacman\Assets\AStarMove.cs:18 
+LEFT
+UnityEngine.DebugLogHandler:Internal_Log(LogType, String, Object)
+UnityEngine.DebugLogHandler:LogFormat(LogType, Object, String, Object[])
+UnityEngine.Logger:Log(LogType, Object)
+UnityEngine.Debug:Log(Object)
+MovesSecuence:Start() (at C:\Users\Dru\Documents\pacman\Assets\MovesSecuence.cs:23)
  
-(Filename: C:/Users/Dru/Documents/pacman/Assets/AStarMove.cs Line: 18)
+(Filename: C:/Users/Dru/Documents/pacman/Assets/MovesSecuence.cs Line: 23)
 
-NullReferenceException: Object reference not set to an instance of an object
-  at AStarMove.Start () [0x00022] in C:\Users\Dru\Documents\pacman\Assets\AStarMove.cs:18 
+UP
+UnityEngine.DebugLogHandler:Internal_Log(LogType, String, Object)
+UnityEngine.DebugLogHandler:LogFormat(LogType, Object, String, Object[])
+UnityEngine.Logger:Log(LogType, Object)
+UnityEngine.Debug:Log(Object)
+MovesSecuence:Start() (at C:\Users\Dru\Documents\pacman\Assets\MovesSecuence.cs:23)
  
-(Filename: C:/Users/Dru/Documents/pacman/Assets/AStarMove.cs Line: 18)
+(Filename: C:/Users/Dru/Documents/pacman/Assets/MovesSecuence.cs Line: 23)
 
+Setting up 1 worker threads for Enlighten.
+  Thread -> id: a7c -> priority: 1 

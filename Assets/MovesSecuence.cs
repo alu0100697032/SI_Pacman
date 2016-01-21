@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class MovesSecuence : MonoBehaviour {
 
-    public GameObject maze;
+    public GameObject mazeMS;
     public float speed;
     int stepSecuence = 0;
     int[] vecinos = new int[4];
@@ -14,10 +15,18 @@ public class MovesSecuence : MonoBehaviour {
     
     void Start()
     {
-        secuence = GetComponent<MoveSecuenceConfigReader>().getSecuence();
+        GameObject inputFieldGo = GameObject.Find("InputFieldMS");
+        InputField inputFieldCo = inputFieldGo.GetComponent<InputField>();
+        secuence = inputFieldCo.text.Split(' ');
+        for (int i = 0; i < secuence.Length; i++)
+        {
+            Debug.Log(secuence[i]);
+        }
+        
+        //   secuence = GetComponent<MoveSecuenceConfigReader>().getSecuence();
         dest = (Vector2)transform.localPosition;
         position = dest;
-        vecinos = maze.GetComponent<nivel>().getVecinos((int)position.x, (int)position.y);
+        vecinos = mazeMS.GetComponent<nivel>().getVecinos((int)position.x, (int)position.y);
         vecinosAux = vecinos;
     }
 
@@ -62,12 +71,12 @@ public class MovesSecuence : MonoBehaviour {
         if ((dest2.x == position.x + 1) || (dest2.x == position.x - 1) || (dest2.y == position.y + 1) || (dest2.y == position.y - 1))
         {
             position = dest;
-            if (maze.GetComponent<nivel>().hayPastilla((int)position.x, (int)position.y))
+            if (mazeMS.GetComponent<nivel>().hayPastilla((int)position.x, (int)position.y))
             {
-                maze.GetComponent<nivel>().eliminarPastilla((int)position.x, (int)position.y);
+                mazeMS.GetComponent<nivel>().eliminarPastilla((int)position.x, (int)position.y);
                 GetComponent<pacmanLogic>().scoreUp(10);
             }
-            vecinos = maze.GetComponent<nivel>().getVecinos((int)position.x, (int)position.y);
+            vecinos = mazeMS.GetComponent<nivel>().getVecinos((int)position.x, (int)position.y);
             vecinosAux = vecinos;
         }
         
