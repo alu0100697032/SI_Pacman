@@ -65,6 +65,16 @@ public class nivel : MonoBehaviour {
         return vecinos;
     }
 
+    public ArrayList getNeighbours(int posX, int posY)
+    {
+        ArrayList Neighbours = new ArrayList();
+        if (maze[posX, posY + 1] != -1) { Neighbours.Add(new Vector3(posX, posY + 1, 0)); }  // UP
+        if (maze[posX + 1, posY] != -1) { Neighbours.Add(new Vector3(posX + 1, posY, 0)); }  // RIGHT
+        if (maze[posX, posY - 1] != -1) { Neighbours.Add(new Vector3(posX, posY - 1, 0)); }  // DOWN
+        if (maze[posX - 1, posY] != -1) { Neighbours.Add(new Vector3(posX - 1, posY, 0)); }  // LEFT
+        return Neighbours;
+    }
+
     public void eliminarPastilla(int x, int y) {
         maze[x, y] = 0;
     }
