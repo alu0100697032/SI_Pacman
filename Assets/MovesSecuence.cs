@@ -39,25 +39,25 @@ public class MovesSecuence : MonoBehaviour {
             stepSecuence = 0;
 
         //Fija el destino del pacman
-        if (secuence[stepSecuence] == "UP" && vecinos[0] == 1)
+        if (secuence[stepSecuence] == "UP" && vecinos[0] != -1)
         {
             //Debug.Log("Posicion pacman: " + position);
             //Debug.Log("Arriba: " + vecinos[0] + " Derecha: " + vecinos[1] + " Abajo: " + vecinos[2] + " Izquierda: " + vecinos[3]);
             dest = position + Vector2.up;
             vecinosAux[0] = -1;
         }
-        else if (secuence[stepSecuence] == "RIGHT" && vecinos[1] == 1)
+        else if (secuence[stepSecuence] == "RIGHT" && vecinos[1] != -1)
         {
             //Debug.Log("Arriba: " + vecinos[0] + " Derecha: " + vecinos[1] + " Abajo: " + vecinos[2] + " Izquierda: " + vecinos[3]);
             dest = position + Vector2.right;
             vecinosAux[1] = -1;
         }
-        else if (secuence[stepSecuence] == "DOWN" && vecinos[2] == 1)
+        else if (secuence[stepSecuence] == "DOWN" && vecinos[2] != -1)
         {
             dest = position - Vector2.up;
             vecinosAux[2] = -1;
         }
-        else if (secuence[stepSecuence] == "LEFT" && vecinos[3] == 1)
+        else if (secuence[stepSecuence] == "LEFT" && vecinos[3] != -1)
         {
             dest = position - Vector2.right;
             vecinosAux[3] = -1;
