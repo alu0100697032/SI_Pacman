@@ -68,6 +68,9 @@ public class AStarMove : MonoBehaviour {
         openList = new ArrayList();
         openList.Add(start);
 
+        Debug.Log("(" + start.x + ", " + start.y + ")" );
+        Debug.Log("(" + goal.x + ", " + goal.y + ")");
+
         //start.nodeTotalCost = 0.0f;
         //start.estimatedCost = HeuristicEstimateCost(start, goal);
         start.z = HeuristicEstimateCost(start, goal) + 0.0f;
@@ -79,6 +82,8 @@ public class AStarMove : MonoBehaviour {
         {
             Debug.Log("OpenList no vacía");
             node = (Vector3)openList[0];
+
+            Debug.Log("(" + node.x + ", " + node.y + ")");
             //Check if the current node is the goal node
             if (node.x == goal.x && node.y == goal.y)
             {
@@ -105,7 +110,7 @@ public class AStarMove : MonoBehaviour {
                     /*neighbourNode. estimatedCost = totalCost + neighbourNodeEstCost;*/
                     if (!openList.Contains(neighbourNode))
                     {
-                        openList.Add(neighbourNode);
+                        //openList.Add(neighbourNode);
                     }
                 }
             }
