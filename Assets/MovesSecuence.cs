@@ -18,11 +18,7 @@ public class MovesSecuence : MonoBehaviour {
         GameObject inputFieldGo = GameObject.Find("InputFieldMS");
         InputField inputFieldCo = inputFieldGo.GetComponent<InputField>();
         secuence = inputFieldCo.text.Split(' ');
-        for (int i = 0; i < secuence.Length; i++)
-        {
-            Debug.Log(secuence[i]);
-        }
-        
+               
         //   secuence = GetComponent<MoveSecuenceConfigReader>().getSecuence();
         dest = (Vector2)transform.localPosition;
         position = dest;
@@ -32,6 +28,7 @@ public class MovesSecuence : MonoBehaviour {
 
     void FixedUpdate()
     {
+        GetComponent<Stop>().enabled = false;
         //Si se encuentra en un cruce cambia al siguiente movimiento de la secuencia
         if (cruce())
             stepSecuence++;
