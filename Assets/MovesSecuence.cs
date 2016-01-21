@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class MovesSecuence : MonoBehaviour {
 
     public GameObject mazeMS;
+    public GameObject inputField;
     public float speed;
     int stepSecuence = 0;
     int[] vecinos = new int[4];
@@ -15,15 +16,7 @@ public class MovesSecuence : MonoBehaviour {
     
     void Start()
     {
-        GameObject inputFieldGo = GameObject.Find("InputFieldMS");
-        InputField inputFieldCo = inputFieldGo.GetComponent<InputField>();
-        secuence = inputFieldCo.text.Split(' ');
-        for (int i = 0; i < secuence.Length; i++)
-        {
-            Debug.Log(secuence[i]);
-        }
-        
-        //   secuence = GetComponent<MoveSecuenceConfigReader>().getSecuence();
+        secuence = inputField.GetComponent<InputField>().text.Split(' ');
         dest = (Vector2)transform.localPosition;
         position = dest;
         vecinos = mazeMS.GetComponent<nivel>().getVecinos((int)position.x, (int)position.y);
@@ -39,25 +32,25 @@ public class MovesSecuence : MonoBehaviour {
             stepSecuence = 0;
 
         //Fija el destino del pacman
-        if (secuence[stepSecuence] == "UP" && vecinos[0] == 1)
+        if (secuence[stepSecuence] == "UP" && vecinos[0] != -1)
         {
             //Debug.Log("Posicion pacman: " + position);
             //Debug.Log("Arriba: " + vecinos[0] + " Derecha: " + vecinos[1] + " Abajo: " + vecinos[2] + " Izquierda: " + vecinos[3]);
             dest = position + Vector2.up;
             vecinosAux[0] = -1;
         }
-        else if (secuence[stepSecuence] == "RIGHT" && vecinos[1] == 1)
+        else if (secuence[stepSecuence] == "RIGHT" && vecinos[1] != -1)
         {
             //Debug.Log("Arriba: " + vecinos[0] + " Derecha: " + vecinos[1] + " Abajo: " + vecinos[2] + " Izquierda: " + vecinos[3]);
             dest = position + Vector2.right;
             vecinosAux[1] = -1;
         }
-        else if (secuence[stepSecuence] == "DOWN" && vecinos[2] == 1)
+        else if (secuence[stepSecuence] == "DOWN" && vecinos[2] != -1)
         {
             dest = position - Vector2.up;
             vecinosAux[2] = -1;
         }
-        else if (secuence[stepSecuence] == "LEFT" && vecinos[3] == 1)
+        else if (secuence[stepSecuence] == "LEFT" && vecinos[3] != -1)
         {
             dest = position - Vector2.right;
             vecinosAux[3] = -1;
