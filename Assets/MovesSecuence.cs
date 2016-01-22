@@ -7,7 +7,7 @@ public class MovesSecuence : MonoBehaviour {
     public GameObject mazeMS;
     public GameObject inputField;
     public float speed;
-    int stepSecuence = 0;
+    int stepSecuence;
     int[] vecinos = new int[4];
     int[] vecinosAux;
     string[] secuence;
@@ -16,13 +16,16 @@ public class MovesSecuence : MonoBehaviour {
     
     void Start()
     {
+        resetMovesSecuence();
+    }
+    public void resetMovesSecuence() {
+        stepSecuence = 0;
         secuence = inputField.GetComponent<InputField>().text.Split(' ');
         dest = (Vector2)transform.localPosition;
         position = dest;
         vecinos = mazeMS.GetComponent<nivel>().getVecinos((int)position.x, (int)position.y);
         vecinosAux = vecinos;
     }
-
     void FixedUpdate()
     {
         //Si se encuentra en un cruce cambia al siguiente movimiento de la secuencia
