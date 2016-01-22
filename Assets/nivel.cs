@@ -37,16 +37,21 @@ public class nivel : MonoBehaviour {
         {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 },
         {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 },
     };
+    private int[,] mazeCopy;
     // Use this for initialization
     void Start () {
+        instantiateMaze();
+    }
+    public void instantiateMaze() {
+        mazeCopy = (int[,])maze.Clone();
         GameObject dot;
         dots = new ArrayList();
         for (int i = 0; i < 30; i++)
             for (int j = 0; j < 33; j++)
             {
                 {
-                    if (maze[i,j] == 1) {
-                        //Debug.Log(maze[i, j] == 1);
+                    if (mazeCopy[i, j] == 1)
+                    {
                         dot = Instantiate(dotPrefab) as GameObject;
                         dot.transform.parent = this.transform;
                         dot.transform.localPosition = new Vector3(i, j, 0);
@@ -55,32 +60,44 @@ public class nivel : MonoBehaviour {
                 }
             }
     }
-
+    public void resetMaze()
+    {
+        removeAllDots();
+        instantiateMaze();
+    
+    }
+   
+    public void removeAllDots() {
+        for (int i = 0; i < dots.Count; i++)
+        {
+            Destroy(dots[i] as GameObject);
+        }
+    }
     public int[] getVecinos(int posX, int posY) {
         int[] vecinos = new int[4];
-        vecinos[0] = maze[posX, posY + 1];//arriba(derecha en realidad)
-        vecinos[1] = maze[posX + 1, posY];//derecha
-        vecinos[2] = maze[posX, posY - 1];//abajo
-        vecinos[3] = maze[posX - 1, posY];//izquierda
+        vecinos[0] = mazeCopy[posX, posY + 1];//arriba(derecha en realidad)
+        vecinos[1] = mazeCopy[posX + 1, posY];//derecha
+        vecinos[2] = mazeCopy[posX, posY - 1];//abajo
+        vecinos[3] = mazeCopy[posX - 1, posY];//izquierda
         return vecinos;
     }
 
     public ArrayList getNeighbours(int posX, int posY)
     {
         ArrayList Neighbours = new ArrayList();
-        if (maze[posX, posY + 1] != -1) { Neighbours.Add(new Vector3(posX, posY + 1, 0)); }  // UP
-        if (maze[posX + 1, posY] != -1) { Neighbours.Add(new Vector3(posX + 1, posY, 0)); }  // RIGHT
-        if (maze[posX, posY - 1] != -1) { Neighbours.Add(new Vector3(posX, posY - 1, 0)); }  // DOWN
-        if (maze[posX - 1, posY] != -1) { Neighbours.Add(new Vector3(posX - 1, posY, 0)); }  // LEFT
+        if (mazeCopy[posX, posY + 1] != -1) { Neighbours.Add(new Vector3(posX, posY + 1, 0)); }  // UP
+        if (mazeCopy[posX + 1, posY] != -1) { Neighbours.Add(new Vector3(posX + 1, posY, 0)); }  // RIGHT
+        if (mazeCopy[posX, posY - 1] != -1) { Neighbours.Add(new Vector3(posX, posY - 1, 0)); }  // DOWN
+        if (mazeCopy[posX - 1, posY] != -1) { Neighbours.Add(new Vector3(posX - 1, posY, 0)); }  // LEFT
         return Neighbours;
     }
 
     public void eliminarPastilla(int x, int y) {
-        maze[x, y] = 0;
+        mazeCopy[x, y] = 0;
     }
 
     public bool hayPastilla(int x, int y) {
-        if (maze[x, y] == 1)
+        if (mazeCopy[x, y] == 1)
             return true;
         else
             return false;

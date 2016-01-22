@@ -12,12 +12,14 @@ public class PATableMove : MonoBehaviour {
 
     void Start()
     {
+        resetPAMove();
+    }
+    public void resetPAMove() {
         PATable = GetComponent<PATableConfigReader>().getPATable();
         dest = (Vector2)transform.localPosition;
         position = dest;
         vecinos = maze.GetComponent<nivel>().getVecinos((int)position.x, (int)position.y);
     }
-
     void FixedUpdate()
     {
         bool stop = false;
