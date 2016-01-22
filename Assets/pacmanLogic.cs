@@ -34,4 +34,10 @@ public class pacmanLogic : MonoBehaviour {
     public Vector2 getPacmanInitialPosition() {
         return pacmanInitialPosition;
     }
+
+    void OnTriggerEnter2D(Collider2D co)
+    {
+        if (co.name == "dot(Clone)")
+            Destroy(co.gameObject);
+    }
 }
