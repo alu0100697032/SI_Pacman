@@ -122,14 +122,4 @@ public class RandomGhostMove : MonoBehaviour {
         else
             return 1;
     }
-    void OnTriggerEnter2D(Collider2D co)
-    {
-        if (co.name == "pacmanMS" || co.name == "pacmanPA" || co.name == "pacmanAS" || co.name == "pacmanNN")
-        {
-            co.gameObject.GetComponent<pacmanLogic>().pacmanToInitalPosition();
-            co.gameObject.GetComponent<MovesSecuence>().resetMovesSecuence();
-            co.gameObject.GetComponent<pacmanLogic>().livesDown();
-            maze.GetComponent<enableGhostMove>().ghostToInitialPosition();
-        }
-    }
 }
