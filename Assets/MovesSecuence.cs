@@ -9,7 +9,8 @@ public class MovesSecuence : MonoBehaviour {
     public float speed;
     int stepSecuence;
     int[] vecinos = new int[4];
-    int[] vecinosAux;
+    int[] vecinosCruce;
+    int[] vecinosEsquina;
     string[] secuence;
     private Vector2 dest = Vector2.zero;
     private Vector2 position = Vector2.zero;
@@ -24,13 +25,16 @@ public class MovesSecuence : MonoBehaviour {
         dest = (Vector2)transform.localPosition;
         position = dest;
         vecinos = mazeMS.GetComponent<nivel>().getVecinos((int)position.x, (int)position.y);
-        vecinosAux = vecinos;
+        vecinosCruce = (int[])vecinos.Clone();
+        vecinosEsquina = (int[])vecinos.Clone();
     }
     void FixedUpdate()
     {
         //Si se encuentra en un cruce cambia al siguiente movimiento de la secuencia
-        if (cruce())
+        if (cruce() || esquina())
+        {
             stepSecuence++;
+        }
         if (stepSecuence >= secuence.Length)
             stepSecuence = 0;
 
@@ -40,23 +44,26 @@ public class MovesSecuence : MonoBehaviour {
             //Debug.Log("Posicion pacman: " + position);
             //Debug.Log("Arriba: " + vecinos[0] + " Derecha: " + vecinos[1] + " Abajo: " + vecinos[2] + " Izquierda: " + vecinos[3]);
             dest = position + Vector2.up;
-            vecinosAux[0] = -1;
+            vecinosCruce[0] = -1;
         }
         else if (secuence[stepSecuence] == "RIGHT" && vecinos[1] != -1)
         {
             //Debug.Log("Arriba: " + vecinos[0] + " Derecha: " + vecinos[1] + " Abajo: " + vecinos[2] + " Izquierda: " + vecinos[3]);
             dest = position + Vector2.right;
-            vecinosAux[1] = -1;
+            vecinosCruce[1] = -1;
         }
         else if (secuence[stepSecuence] == "DOWN" && vecinos[2] != -1)
         {
             dest = position + Vector2.down;
-            vecinosAux[2] = -1;
+            vecinosCruce[2] = -1;
         }
         else if (secuence[stepSecuence] == "LEFT" && vecinos[3] != -1)
         {
             dest = position + Vector2.left;
-            vecinosAux[3] = -1;
+            vecinosCruce[3] = -1;
+        }
+        else {
+            stepSecuence++;
         }
 
         //Mueve el pacman teniendo en cuenta la velocidad
@@ -73,7 +80,8 @@ public class MovesSecuence : MonoBehaviour {
                 GetComponent<pacmanLogic>().scoreUp(10);
             }
             vecinos = mazeMS.GetComponent<nivel>().getVecinos((int)position.x, (int)position.y);
-            vecinosAux = vecinos;
+            vecinosCruce = (int[])vecinos.Clone();
+            vecinosEsquina = (int[])vecinos.Clone();
         }
         
         // Anima al pacman
@@ -84,8 +92,8 @@ public class MovesSecuence : MonoBehaviour {
     //Devuelve true si se encuentra en un cruce
     public bool cruce() {
         int aux = 0;
-        for (int i = 0; i < vecinosAux.Length; i++) {
-            if (vecinosAux[i] != -1)
+        for (int i = 0; i < vecinosCruce.Length; i++) {
+            if (vecinosCruce[i] != -1)
                 aux++;
         }
         if (aux > 2)
@@ -95,14 +103,26 @@ public class MovesSecuence : MonoBehaviour {
     }
     //Devuelve true si se encuentra en una esquina
     public bool esquina() {
-        if (vecinos[0] == -1 && vecinos[1] == -1)
+        if (vecinosEsquina[0] == -1 && vecinosEsquina[1] == -1)
+        {
+            vecinosEsquina[0] = 0;
             return true;
-        else if (vecinos[0] == -1 && vecinos[3] == -1)
+        }
+        else if (vecinosEsquina[0] == -1 && vecinosEsquina[3] == -1)
+        {
+            vecinosEsquina[0] = 0;
             return true;
-        else if (vecinos[2] == -1 && vecinos[3] == -1)
+        }
+        else if (vecinosEsquina[2] == -1 && vecinosEsquina[3] == -1)
+        {
+            vecinosEsquina[2] = 0;
             return true;
-        else if (vecinos[2] == -1 && vecinos[1] == -1)
+        }
+        else if (vecinosEsquina[2] == -1 && vecinosEsquina[1] == -1)
+        {
+            vecinosEsquina[2] = 0;
             return true;
+        }
         else
             return false;
     }
