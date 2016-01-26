@@ -81,6 +81,15 @@ public class nivel : MonoBehaviour {
         vecinos[3] = mazeCopy[posX - 1, posY];//izquierda
         return vecinos;
     }
+    public ArrayList getDirectionsAviable(int posX, int posY)
+    {
+        ArrayList directionsAviable = new ArrayList();
+        if (mazeCopy[posX, posY + 1] != -1) { directionsAviable.Add(Vector2.up); }  // UP
+        if (mazeCopy[posX + 1, posY] != -1) { directionsAviable.Add(Vector2.right); }  // RIGHT
+        if (mazeCopy[posX, posY - 1] != -1) { directionsAviable.Add(Vector2.down); }  // DOWN
+        if (mazeCopy[posX - 1, posY] != -1) { directionsAviable.Add(Vector2.left); }  // LEFT
+        return directionsAviable;
+    }
 
     public ArrayList getNeighbours(int posX, int posY)
     {
