@@ -50,12 +50,12 @@ public class MovesSecuence : MonoBehaviour {
         }
         else if (secuence[stepSecuence] == "DOWN" && vecinos[2] != -1)
         {
-            dest = position - Vector2.up;
+            dest = position + Vector2.down;
             vecinosAux[2] = -1;
         }
         else if (secuence[stepSecuence] == "LEFT" && vecinos[3] != -1)
         {
-            dest = position - Vector2.right;
+            dest = position + Vector2.left;
             vecinosAux[3] = -1;
         }
 

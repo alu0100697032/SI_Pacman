@@ -46,15 +46,15 @@ public class RandomGhostMove : MonoBehaviour {
                 System.Random random = new System.Random();
                 int randomNumber = random.Next(0, 2);
                 if (randomNumber == 0)
-                    direction = -Vector2.right;
-                else if (randomNumber == 1)
                     direction = Vector2.right;
+                else if (randomNumber == 1)
+                    direction = Vector2.left;
             }
             else if ((Vector2)transform.localPosition == dest)
             {
                 ghostPosition = dest;
                 vecinos = maze.GetComponent<nivel>().getVecinos((int)ghostPosition.x, (int)ghostPosition.y);
-                dest = (Vector2)transform.localPosition + Vector2.up;
+                dest = ghostPosition + Vector2.up;
             }
         }
         else {
@@ -64,12 +64,13 @@ public class RandomGhostMove : MonoBehaviour {
                 vecinos = maze.GetComponent<nivel>().getVecinos((int)ghostPosition.x, (int)ghostPosition.y);
                 if (cruce() || esquina())
                 {
-                    ArrayList directions = maze.GetComponent<nivel>().getDirectionsAviable((int)ghostPosition.x, (int)ghostPosition.y);
+                    ArrayList directions = maze.GetComponent<nivel>().getAviableDirections(
+                        (int)ghostPosition.x, (int)ghostPosition.y, getOpositeDirection(direction));
                     System.Random random = new System.Random();
                     int randomNumber = random.Next(0, directions.Count);
-                    direction = (Vector2)maze.GetComponent<nivel>().getDirectionsAviable((int)ghostPosition.x, (int)ghostPosition.y)[randomNumber];
+                    direction = (Vector2)directions[randomNumber];
                 }
-                dest = (Vector2)transform.localPosition + direction;
+                dest = ghostPosition + direction;
             }
             
             float step = speed * Time.deltaTime;
@@ -109,6 +110,17 @@ public class RandomGhostMove : MonoBehaviour {
             return true;
         else
             return false;
+    }
+    public int getOpositeDirection(Vector2 currentDirection)
+    {
+        if (currentDirection == Vector2.up)
+            return 2;
+        else if (currentDirection == Vector2.right)
+            return 3;
+        else if (currentDirection == Vector2.down)
+            return 0;
+        else
+            return 1;
     }
     void OnTriggerEnter2D(Collider2D co)
     {
