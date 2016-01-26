@@ -27,8 +27,12 @@ public class pacmanLogic : MonoBehaviour {
         pacmanToInitalPosition();
         scoreUp(0);
         gameOver.SetActive(false);
+        resetVisualLives();
     }
-
+    void resetVisualLives() {
+        for (int i = 0; i < visualLives.Length; i++)
+            visualLives[i].SetActive(true);
+    }
     public void pacmanToInitalPosition()
     {
         transform.localPosition = pacmanInitialPosition;
