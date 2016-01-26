@@ -8,19 +8,28 @@ public class pacmanLogic : MonoBehaviour {
     private int score;
     private Vector2 pacmanInitialPosition;
     public GameObject scoreText;
+    public GameObject[] visualLives;
+
 	// Use this for initialization
 	void Start () {
         pacmanInitialPosition = new Vector2(14, 14);
         instantiatePacman();
 	}
+
     public void instantiatePacman() {
         lives = 3;
         score = 0;
     }
+
     public void resetPacman() {
         instantiatePacman();
-        transform.localPosition = pacmanInitialPosition;
+        pacmanToInitalPosition();
         scoreUp(0);
+    }
+
+    public void pacmanToInitalPosition()
+    {
+        transform.localPosition = pacmanInitialPosition;
     }
     public void scoreUp(int pointScored) {
         score += pointScored;
@@ -28,12 +37,20 @@ public class pacmanLogic : MonoBehaviour {
     }
 
     public void livesDown() {
-        if(lives > 0)
+        if (lives > 0)
+        {
+            visualLives[lives - 1].SetActive(false);
             lives--;
+        }if(lives == 0)//si no game over
+        {
+            Destroy(this.gameObject);
+        }
     }
+
     public int getScore() {
         return score;
     }
+
     public int getLives() {
         return lives;
     }

@@ -21,10 +21,10 @@ public class RandomGhostMove : MonoBehaviour {
 	}
 
     public void resetGhost() {
-        insideHouse = true;
         ghostPosition = ghostInitialPosition;
         dest = ghostPosition;
         transform.localPosition = ghostPosition;
+        insideHouse = true;
         vecinos = maze.GetComponent<nivel>().getVecinos((int)ghostPosition.x, (int)ghostPosition.y);
     }
 
@@ -113,6 +113,11 @@ public class RandomGhostMove : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D co)
     {
         if (co.name == "pacmanMS" || co.name == "pacmanPA" || co.name == "pacmanAS" || co.name == "pacmanNN")
-            co.gameObject.SetActive(false);
+        {
+            co.gameObject.GetComponent<pacmanLogic>().pacmanToInitalPosition();
+            co.gameObject.GetComponent<MovesSecuence>().resetMovesSecuence();
+            co.gameObject.GetComponent<pacmanLogic>().livesDown();
+            maze.GetComponent<enableGhostMove>().ghostToInitialPosition();
+        }
     }
 }

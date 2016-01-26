@@ -18,8 +18,43 @@ public class enableGhostMove : MonoBehaviour {
             restarGhostMove[i] = false;
         }
     }
-	// Update is called once per frame
-	void Update () {
+
+    public void disableGhostMove()
+    {
+        for (int i = 0; i < ghosts.Length; i++)
+        {
+            ghosts[i].GetComponent<RandomGhostMove>().enabled = false;
+        }
+    }
+
+    public void restartMove()
+    {
+        for (int i = 0; i < ghosts.Length; i++)
+        {
+            if (restarGhostMove[i] == true)
+                ghosts[i].GetComponent<RandomGhostMove>().enabled = true;
+        }
+    }
+
+    public void resetAllGhost()
+    {
+        disableGhostMove();
+        for (int i = 0; i < ghosts.Length; i++)
+        {
+            ghosts[i].GetComponent<RandomGhostMove>().resetGhost();
+        }
+    }
+
+    public void ghostToInitialPosition()
+    {
+        for (int i = 0; i < ghosts.Length; i++)
+        {
+            ghosts[i].GetComponent<RandomGhostMove>().resetGhost();
+        }
+        resetGhostMove();
+    }
+    // Update is called once per frame
+    void Update () {
         if (Int32.Parse(score.GetComponent<Text>().text) == 20)
         {
             ghosts[0].GetComponent<RandomGhostMove>().enabled = true;
@@ -41,27 +76,5 @@ public class enableGhostMove : MonoBehaviour {
             restarGhostMove[3] = true;
         }
 
-    }
-
-    public void disableGhostMove() {
-        for (int i = 0; i < ghosts.Length; i++) {
-            ghosts[i].GetComponent<RandomGhostMove>().enabled = false;
-        }
-    }
-
-    public void restartMove() {
-        for (int i = 0; i < ghosts.Length; i++)
-        {
-            if(restarGhostMove[i] == true)
-                ghosts[i].GetComponent<RandomGhostMove>().enabled = true;
-        }
-    }
-
-    public void resetAllGhost() {
-        disableGhostMove();
-        for (int i = 0; i < ghosts.Length; i++)
-        {
-            ghosts[i].GetComponent<RandomGhostMove>().resetGhost();
-        }
     }
 }
