@@ -8,6 +8,7 @@ public class pacmanLogic : MonoBehaviour {
     private int score;
     private Vector2 pacmanInitialPosition;
     public GameObject scoreText;
+    public GameObject gameOver;
     public GameObject[] visualLives;
 
 	// Use this for initialization
@@ -25,6 +26,7 @@ public class pacmanLogic : MonoBehaviour {
         instantiatePacman();
         pacmanToInitalPosition();
         scoreUp(0);
+        gameOver.SetActive(false);
     }
 
     public void pacmanToInitalPosition()
@@ -43,6 +45,7 @@ public class pacmanLogic : MonoBehaviour {
             lives--;
         }if(lives == 0)//si no game over
         {
+            gameOver.SetActive(true);
             Destroy(this.gameObject);
         }
     }
