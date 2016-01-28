@@ -23,6 +23,7 @@ public class eatPacman : MonoBehaviour {
         else if (co.name == "pacmanAS")
         {
             co.gameObject.GetComponent<pacmanLogic>().pacmanToInitalPosition();
+            co.gameObject.GetComponent<AStarMove>().resetAStar();
             co.gameObject.GetComponent<pacmanLogic>().livesDown();
             maze.GetComponent<enableGhostMove>().ghostToInitialPosition();
         }

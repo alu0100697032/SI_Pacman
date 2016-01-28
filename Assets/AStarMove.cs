@@ -12,16 +12,22 @@ public class AStarMove : MonoBehaviour
 
     private ArrayList openList;
     private ArrayList closedList;
-    private int stepSecuence = 1;
+    private int stepSecuence;
     private ArrayList path;
-    private bool existsPath = false;
-    private Vector2 aStarDest = Vector2.zero;
+    private bool existsPath;
+    private Vector2 aStarDest;
 
     // Start
     void Start()
     {
+        resetAStar();
+    }
+    public void resetAStar() {
         dest = (Vector2)transform.localPosition;
         position = dest;
+        stepSecuence = 1;
+        existsPath = false;
+        aStarDest = Vector2.zero;
     }
     // Update
     void FixedUpdate()
@@ -80,7 +86,6 @@ public class AStarMove : MonoBehaviour
 
     public ArrayList FindPath(Node start, Node goal)
     {
-        //Debug.Log("Empezando FindPath");
         openList = new ArrayList();
         start.position.z = HeuristicEstimateCost(start, goal) + 0.0f;
         openList.Add(start);
@@ -89,16 +94,11 @@ public class AStarMove : MonoBehaviour
         Node node = null;
         while (openList.Count != 0)
         {
-            //Debug.Log("OpenList no vacía");
-            
             node = (Node)openList[0];
-            //Debug.Log("NODE: (" + node.position.x + ", " + node.position.y + ", " + node .position.z + ", " + node.parent + ") <");
-
-
+            
             //Check if the current node is the goal node
             if (node.position.x == goal.position.x && node.position.y == goal.position.y)
             {
-                //Debug.Log("Final, calculamos RUTA obtenida");
                 return CalculatePath(node);
             }
 
@@ -113,64 +113,41 @@ public class AStarMove : MonoBehaviour
                 {
                     neighbourNode.position.z = HeuristicEstimateCost(neighbourNode, goal);
                     neighbourNode.parent = node;
-
-                    //Debug.Log("NEIGHTBOURNODE: (" + neighbourNode.position.x + ", " + neighbourNode.position.y + ", " + neighbourNode.position.z + ", " + neighbourNode.parent.position.x + ") <");
-
+                    
                     if (!openList.Contains(neighbourNode))
                     {
-                        //Debug.Log("NODE: (" + node.x + ", " + node.y + ", " + node.z + ")");
-                       
-                      
                         openList.Add(neighbourNode);
                         openList.Sort();
-
-                        //Debug.Log("Añadimos a Openlist");
+                        
                         Node tempd = (Node)openList[0];
-                        //Debug.Log("OPENLIST: (" + tempd.position.x + ", " + tempd.position.y + ", " + tempd.position.z + ", " + tempd.parent + ") <");
-
-                        //Node tempdA = (Node)openList[openList.Count - 1];
-                        //Debug.Log("OPENLIST: (" + tempdA.position.x + ", " + tempdA.position.y + ", " + tempdA.position.z + ", " + tempdA.parent + ") <");
-
                     }
                 }
             }
             //Push the current node to the closed list
-
             closedList.Add(node);
             closedList.Sort();
             Node temp = (Node)closedList[0];
-            //Debug.Log("CLOSEDLIST: (" + temp.position.x + ", " + temp.position.y + ", " + temp.position.z + ")");
-
             //and remove it from openList
             openList.Remove(node);
         }
 
         if (node.position.x != goal.position.x && node.position.y != goal.position.y)
         {
-            //Debug.LogError("Goal Not Found");
             return null;
         }
-        //Debug.Log("RUTAAA1");
         return CalculatePath(node);
     }
 
     private static ArrayList CalculatePath(Node node)
     {
-        //Debug.Log("RUTAAA2");
         ArrayList list = new ArrayList();
-        //Debug.Log("RUTAAA2" + node);
         while (node != null)
         {
-            //Debug.Log("entro");
             list.Add(node);
             node = node.parent;
         }
         list.Reverse();
         return list;
     }
-
- 
-
-  
 }
 
