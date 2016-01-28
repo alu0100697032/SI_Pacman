@@ -14,7 +14,7 @@ public class AStarMove : MonoBehaviour
     private ArrayList openList;
     private ArrayList closedList;
 
-    
+
 
     // Start
     void Start()
@@ -25,12 +25,19 @@ public class AStarMove : MonoBehaviour
         //vecinos = maze.GetComponent<nivel>().getVecinos((int)position.x, (int)position.y);
         Node a = new Node(position);
         Node b = new Node(new Vector3(2, 2, 0));
-        FindPath(a , b);
+        ArrayList List = FindPath(a, b);
+        Debug.Log("==================:" );
+
+        for (int i = 0; i < List.Count; i++)
+        {
+            Node nod = (Node)List[i];
+            Debug.Log("NODE: (" + nod.position.x + ", " + nod.position.y + ", " + nod.position.z + ", " + nod.parent + ") <");
+
+        }
+
     }
-
-
-    // Update
-    void FixedUpdate()
+        // Update
+        void FixedUpdate()
     {
 
 
@@ -73,33 +80,18 @@ public class AStarMove : MonoBehaviour
         openList = new ArrayList();
         start.position.z = HeuristicEstimateCost(start, goal) + 0.0f;
         openList.Add(start);
-
-        Debug.Log("COMIENZO: (" + start.position.x + ", " + start.position.y + ", " + start.position.z + ")" );
-        Debug.Log("FINAL: (" + goal.position.x + ", " + goal.position.y + ", " + goal.position.z + ")");
-
-        //start.nodeTotalCost = 0.0f;
-        //start.estimatedCost = HeuristicEstimateCost(start, goal);
-        
-
         closedList = new ArrayList();
-        //Vector3 node = Vector3.zero;
+
         Node node = null;
-
-        // IMPRIMIR ESTADO
-        /*for (int w = 0; w < openList.Count; w++)
-        {
-            node = (Node)openList[w];
-            Debug.Log("(" + node.position.x + ", " + node.position.y + ", " + node.position.z + ")");
-
-        }*/
-
         while (openList.Count != 0)
         {
             Debug.Log("OpenList no vacía");
+            
             node = (Node)openList[0];
+            Debug.Log("NODE: (" + node.position.x + ", " + node.position.y + ", " + node .position.z + ", " + node.parent + ") <");
 
-          
-                //Check if the current node is the goal node
+
+            //Check if the current node is the goal node
             if (node.position.x == goal.position.x && node.position.y == goal.position.y)
             {
                 Debug.Log("Final, calculamos RUTA obtenida");
@@ -108,29 +100,18 @@ public class AStarMove : MonoBehaviour
 
             //Create an ArrayList to store the neighboring nodes
             ArrayList neighbours = new ArrayList();
-            // GridManager.instance.GetNeighbours(node, neighbours);
-
             neighbours = maze.GetComponent<nivel>().getNeighbours((int)node.position.x, (int)node.position.y);
-           /* Debug.Log("NEIGHBOUR:" + neighbours.Count);*/
             for (int i = 0; i < neighbours.Count; i++)
             {
                 Node neighbourNode = new Node((Vector3)neighbours[i]);
-                /*Debug.Log("NEIGHBOUR0: (" + neighbourNode.position.x + ", " + neighbourNode.position.y + ", " + neighbourNode.position.z + ")");*/
-
+            
                 if (!closedList.Contains(neighbourNode))
                 {
-                   /* Debug.Log("NEIGHBOUR1: (" + neighbourNode.position.x + ", " + neighbourNode.position.y + ", " + neighbourNode.position.z + ")");*/
-
-
-                    float cost = HeuristicEstimateCost(neighbourNode, goal);
-                    /*Debug.Log("COST: " + cost);*/
-                    /*float totalCost = /*node.nodeTotalCost neighbourNode.z +  cost; */
-
-                    //float neighbourNodeEstCost = HeuristicEstimateCost(neighbourNode, goal);
-                    neighbourNode.position.z /*nodeTotalCost*/ = cost;
+                    neighbourNode.position.z = HeuristicEstimateCost(neighbourNode, goal);
                     neighbourNode.parent = node;
-                    /*neighbourNode.parent = node;*/
-                    /*neighbourNode. estimatedCost = totalCost + neighbourNodeEstCost;*/
+
+                    Debug.Log("NEIGHTBOURNODE: (" + neighbourNode.position.x + ", " + neighbourNode.position.y + ", " + neighbourNode.position.z + ", " + neighbourNode.parent.position.x + ") <");
+
                     if (!openList.Contains(neighbourNode))
                     {
                         //Debug.Log("NODE: (" + node.x + ", " + node.y + ", " + node.z + ")");
@@ -141,10 +122,10 @@ public class AStarMove : MonoBehaviour
 
                         Debug.Log("Añadimos a Openlist");
                         Node tempd = (Node)openList[0];
-                        Debug.Log("OPENLIST: (" + tempd.position.x + ", " + tempd.position.y + ", " + tempd.position.z + ") <");
+                        Debug.Log("OPENLIST: (" + tempd.position.x + ", " + tempd.position.y + ", " + tempd.position.z + ", " + tempd.parent + ") <");
 
-                        Node tempdA = (Node)openList[openList.Count - 1];
-                        Debug.Log("OPENLIST: (" + tempdA.position.x + ", " + tempdA.position.y + ", " + tempdA.position.z + ")");
+                        //Node tempdA = (Node)openList[openList.Count - 1];
+                        //Debug.Log("OPENLIST: (" + tempdA.position.x + ", " + tempdA.position.y + ", " + tempdA.position.z + ", " + tempdA.parent + ") <");
 
                     }
                 }
@@ -165,16 +146,20 @@ public class AStarMove : MonoBehaviour
             Debug.LogError("Goal Not Found");
             return null;
         }
+        Debug.Log("RUTAAA1");
         return CalculatePath(node);
     }
 
     private static ArrayList CalculatePath(Node node)
     {
+        Debug.Log("RUTAAA2");
         ArrayList list = new ArrayList();
+        Debug.Log("RUTAAA2" + node);
         while (node != null)
         {
+            Debug.Log("entro");
             list.Add(node);
-            //node = node.parent;
+            node = node.parent;
         }
         list.Reverse();
         return list;

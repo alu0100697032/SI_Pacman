@@ -1,44 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
-public class Node : MonoBehaviour, IComparable
+public class Node : IComparable
 {
     public int nodeTotalCost;
-    //public float estimatedCost;
-    //public bool bObstacle;
     public Node parent;
     public Vector3 position;
 
     public Node()
     {
-        //this.estimatedCost = 0.0f;
         this.nodeTotalCost = 0;
-        //this.bObstacle = false;
         this.parent = null;
     }
 
     public Node(Vector3 pos)
     {
-        //this.estimatedCost = 0.0f;
         this.nodeTotalCost = 0;
-        //this.bObstacle = false;
         this.parent = null;
         this.position = pos;
     }
 
-
-
-    /*public void MarkAsObstacle()
-    {
-        this.bObstacle = true;
-    }*/
     public override bool Equals(object o)
     {
         Node temp = (Node)o;
-        if (this.position.x == temp.position.x && this.position.y == temp.position.y)
-            return true;
-        else
-            return false;
+        return ((this.position.x == temp.position.x) && (this.position.y == temp.position.y));
     }
 
     public override int GetHashCode()
