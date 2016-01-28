@@ -8,6 +8,7 @@ public class RandomGhostMove : MonoBehaviour {
     public float speed = 10f;
     private bool insideHouse;
     public GameObject maze;
+    public int idGhost;
     private Vector2 ghostInitialPosition;
     private Vector2 ghostPosition;
     private Vector2 dest = Vector2.zero;
@@ -41,6 +42,7 @@ public class RandomGhostMove : MonoBehaviour {
             {
                 insideHouse = false;
                 ghostPosition = dest;
+                maze.GetComponent<nivel>().setGhosPosition(getGhostPosition(), idGhost);
                 vecinos = maze.GetComponent<nivel>().getVecinos((int)ghostPosition.x, (int)ghostPosition.y);
                 //mover a derecha o a izquierda
                 System.Random random = new System.Random();
@@ -53,6 +55,7 @@ public class RandomGhostMove : MonoBehaviour {
             else if ((Vector2)transform.localPosition == dest)
             {
                 ghostPosition = dest;
+                maze.GetComponent<nivel>().setGhosPosition(getGhostPosition(), idGhost);
                 vecinos = maze.GetComponent<nivel>().getVecinos((int)ghostPosition.x, (int)ghostPosition.y);
                 dest = ghostPosition + Vector2.up;
             }
@@ -61,6 +64,7 @@ public class RandomGhostMove : MonoBehaviour {
             if ((Vector2)transform.localPosition == dest)
             {
                 ghostPosition = dest;
+                maze.GetComponent<nivel>().setGhosPosition(getGhostPosition(), idGhost);
                 vecinos = maze.GetComponent<nivel>().getVecinos((int)ghostPosition.x, (int)ghostPosition.y);
                 if (cruce() || esquina())
                 {
@@ -121,5 +125,8 @@ public class RandomGhostMove : MonoBehaviour {
             return 0;
         else
             return 1;
+    }
+    public Vector2 getGhostPosition() {
+        return ghostPosition;
     }
 }

@@ -5,6 +5,7 @@ public class nivel : MonoBehaviour {
 
     public GameObject dotPrefab;
     private ArrayList dots;
+    private Vector2[] ghosts;
     private int[,] maze = { 
         {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 },
         {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 },
@@ -59,6 +60,8 @@ public class nivel : MonoBehaviour {
                     }
                 }
             }
+        ghosts = new Vector2[4];
+        setGhostsInitialPosition();
     }
     public void resetMaze()
     {
@@ -66,6 +69,18 @@ public class nivel : MonoBehaviour {
         instantiateMaze();
     
     }
+
+    public void setGhostsInitialPosition() {
+        GetComponent<enableGhostMove>().ghosts[0].GetComponent<RandomGhostMove>().getGhostPosition();
+        GetComponent<enableGhostMove>().ghosts[1].GetComponent<RandomGhostMove>().getGhostPosition();
+        GetComponent<enableGhostMove>().ghosts[2].GetComponent<RandomGhostMove>().getGhostPosition();
+        GetComponent<enableGhostMove>().ghosts[3].GetComponent<RandomGhostMove>().getGhostPosition();
+    }
+
+    public void setGhosPosition(Vector2 pos, int idGhost) {
+        ghosts[idGhost] = pos;
+    }
+
     public Vector2 getClosestPill(Vector2 pacman) {
         Vector2 closest = Vector2.zero;
         float closestDist = 999999;
@@ -95,11 +110,42 @@ public class nivel : MonoBehaviour {
     }
     public int[] getVecinos(int posX, int posY) {
         int[] vecinos = new int[4];
-        vecinos[0] = mazeCopy[posX, posY + 1];//arriba(derecha en realidad)
-        vecinos[1] = mazeCopy[posX + 1, posY];//derecha
-        vecinos[2] = mazeCopy[posX, posY - 1];//abajo
-        vecinos[3] = mazeCopy[posX - 1, posY];//izquierda
+        if(isGhost(posX, posY + 1)){
+            vecinos[0] = -1;
+        }
+        else{
+            vecinos[0] = mazeCopy[posX, posY + 1];//arriba(derecha en realidad)
+        }
+        if (isGhost(posX + 1, posY)){
+            vecinos[1] = -1;
+        }
+        else{
+            vecinos[1] = mazeCopy[posX + 1, posY];//derecha
+        }
+        if (isGhost(posX, posY - 1)){
+            vecinos[2] = -1;
+        }
+        else{
+            vecinos[2] = mazeCopy[posX, posY - 1];//abajo
+        }
+        if (isGhost(posX - 1, posY)){
+            vecinos[3] = -1;
+        }
+        else{
+            vecinos[3] = mazeCopy[posX - 1, posY];//izquierda
+        }
         return vecinos;
+    }
+    public bool isGhost(int x, int y) {
+        bool isGhost = false;
+        for (int i = 0; i < ghosts.Length; i++){
+            if(ghosts[i].x == x || ghosts[i].y == y)
+            {
+                isGhost = true;
+                break;
+            }
+        }
+        return isGhost;
     }
     public ArrayList getAviableDirections(int posX, int posY, int opositeDirection)
     {
