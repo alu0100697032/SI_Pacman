@@ -28,6 +28,7 @@ public class pacmanLogic : MonoBehaviour {
         scoreUp(0);
         gameOver.SetActive(false);
         resetVisualLives();
+        instantiatePacman();
     }
     void resetVisualLives() {
         for (int i = 0; i < visualLives.Length; i++)
@@ -50,7 +51,7 @@ public class pacmanLogic : MonoBehaviour {
         }if(lives == 0)//si no game over
         {
             gameOver.SetActive(true);
-            Destroy(this.gameObject);
+            this.gameObject.SetActive(false);
         }
     }
 
