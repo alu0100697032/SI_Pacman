@@ -54,7 +54,7 @@ public class nivel : MonoBehaviour {
                     {
                         dot = Instantiate(dotPrefab) as GameObject;
                         dot.transform.parent = this.transform;
-                        dot.transform.localPosition = new Vector3(i, j, 0);
+                        dot.transform.localPosition = new Vector2(i, j);
                         dots.Add(dot);
                     }
                 }
@@ -66,7 +66,27 @@ public class nivel : MonoBehaviour {
         instantiateMaze();
     
     }
-   
+    public Vector2 getClosestPill(Vector2 pacman) {
+        Vector2 closest = Vector2.zero;
+        float closestDist = 999999;
+        for (int i = 2; i < 30-2; i++)
+            for (int j = 2; j < 33-2; j++)
+            {
+                {
+                    if (mazeCopy[i, j] == 1)
+                    {
+                        Vector2 pillPosition = new Vector2(i, j);
+                        float currentDist = (pacman - pillPosition).magnitude;
+                        if (closestDist > (pacman - pillPosition).magnitude)
+                        {
+                            closestDist = currentDist;
+                            closest = pillPosition;
+                        }
+                    }
+                }
+            }
+        return closest;
+    }
     public void removeAllDots() {
         for (int i = 0; i < dots.Count; i++)
         {

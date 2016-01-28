@@ -7,40 +7,38 @@ public class AStarMove : MonoBehaviour
 
     public GameObject maze;
     public float speed;
-    int[] vecinos = new int[4];
     private Vector2 dest = Vector2.zero;
     private Vector2 position = Vector2.zero;
 
     private ArrayList openList;
     private ArrayList closedList;
-
-
+    private int stepSecuence = 1;
+    private ArrayList path;
+    private bool existsPath = false;
+    private Vector2 aStarDest = Vector2.zero;
 
     // Start
     void Start()
     {
-        Debug.Log("Start");
         dest = (Vector2)transform.localPosition;
         position = dest;
-        //vecinos = maze.GetComponent<nivel>().getVecinos((int)position.x, (int)position.y);
-        Node a = new Node(position);
-        Node b = new Node(new Vector3(2, 2, 0));
-        ArrayList List = FindPath(a, b);
-        Debug.Log("==================:" );
-
-        for (int i = 0; i < List.Count; i++)
-        {
-            Node nod = (Node)List[i];
-            Debug.Log("NODE: (" + nod.position.x + ", " + nod.position.y + ", " + nod.position.z + ", " + nod.parent + ") <");
-
-        }
-
     }
-        // Update
-        void FixedUpdate()
+    // Update
+    void FixedUpdate()
     {
-
-
+        if (!existsPath) {
+            Node a = new Node(position);
+            Node b = new Node(maze.GetComponent<nivel>().getClosestPill(position));
+            path = FindPath(a, b);
+            Node lastNode = (Node)path[path.Count - 1];
+            aStarDest = (Vector2)lastNode.position;
+            existsPath = true;
+        }
+        if (existsPath)
+        {
+            Node nod = (Node)path[stepSecuence];
+            dest = (Vector2)nod.position;
+        }
         //Mueve el pacman teniendo en cuenta la velocidad
         float step = speed * Time.deltaTime;
         Vector2 dest2 = Vector2.MoveTowards(transform.localPosition, dest, step);
@@ -54,7 +52,13 @@ public class AStarMove : MonoBehaviour
                 maze.GetComponent<nivel>().eliminarPastilla((int)position.x, (int)position.y);
                 GetComponent<pacmanLogic>().scoreUp(10);
             }
-            vecinos = maze.GetComponent<nivel>().getVecinos((int)position.x, (int)position.y);
+            if(stepSecuence < path.Count-1)
+                stepSecuence++;
+            if (aStarDest == position) {
+                stepSecuence = 1;
+                existsPath = false;
+            }
+
         }
 
         // Anima al pacman
@@ -76,7 +80,7 @@ public class AStarMove : MonoBehaviour
 
     public ArrayList FindPath(Node start, Node goal)
     {
-        Debug.Log("Empezando FindPath");
+        //Debug.Log("Empezando FindPath");
         openList = new ArrayList();
         start.position.z = HeuristicEstimateCost(start, goal) + 0.0f;
         openList.Add(start);
@@ -85,16 +89,16 @@ public class AStarMove : MonoBehaviour
         Node node = null;
         while (openList.Count != 0)
         {
-            Debug.Log("OpenList no vacía");
+            //Debug.Log("OpenList no vacía");
             
             node = (Node)openList[0];
-            Debug.Log("NODE: (" + node.position.x + ", " + node.position.y + ", " + node .position.z + ", " + node.parent + ") <");
+            //Debug.Log("NODE: (" + node.position.x + ", " + node.position.y + ", " + node .position.z + ", " + node.parent + ") <");
 
 
             //Check if the current node is the goal node
             if (node.position.x == goal.position.x && node.position.y == goal.position.y)
             {
-                Debug.Log("Final, calculamos RUTA obtenida");
+                //Debug.Log("Final, calculamos RUTA obtenida");
                 return CalculatePath(node);
             }
 
@@ -110,7 +114,7 @@ public class AStarMove : MonoBehaviour
                     neighbourNode.position.z = HeuristicEstimateCost(neighbourNode, goal);
                     neighbourNode.parent = node;
 
-                    Debug.Log("NEIGHTBOURNODE: (" + neighbourNode.position.x + ", " + neighbourNode.position.y + ", " + neighbourNode.position.z + ", " + neighbourNode.parent.position.x + ") <");
+                    //Debug.Log("NEIGHTBOURNODE: (" + neighbourNode.position.x + ", " + neighbourNode.position.y + ", " + neighbourNode.position.z + ", " + neighbourNode.parent.position.x + ") <");
 
                     if (!openList.Contains(neighbourNode))
                     {
@@ -120,9 +124,9 @@ public class AStarMove : MonoBehaviour
                         openList.Add(neighbourNode);
                         openList.Sort();
 
-                        Debug.Log("Añadimos a Openlist");
+                        //Debug.Log("Añadimos a Openlist");
                         Node tempd = (Node)openList[0];
-                        Debug.Log("OPENLIST: (" + tempd.position.x + ", " + tempd.position.y + ", " + tempd.position.z + ", " + tempd.parent + ") <");
+                        //Debug.Log("OPENLIST: (" + tempd.position.x + ", " + tempd.position.y + ", " + tempd.position.z + ", " + tempd.parent + ") <");
 
                         //Node tempdA = (Node)openList[openList.Count - 1];
                         //Debug.Log("OPENLIST: (" + tempdA.position.x + ", " + tempdA.position.y + ", " + tempdA.position.z + ", " + tempdA.parent + ") <");
@@ -135,7 +139,7 @@ public class AStarMove : MonoBehaviour
             closedList.Add(node);
             closedList.Sort();
             Node temp = (Node)closedList[0];
-            Debug.Log("CLOSEDLIST: (" + temp.position.x + ", " + temp.position.y + ", " + temp.position.z + ")");
+            //Debug.Log("CLOSEDLIST: (" + temp.position.x + ", " + temp.position.y + ", " + temp.position.z + ")");
 
             //and remove it from openList
             openList.Remove(node);
@@ -143,21 +147,21 @@ public class AStarMove : MonoBehaviour
 
         if (node.position.x != goal.position.x && node.position.y != goal.position.y)
         {
-            Debug.LogError("Goal Not Found");
+            //Debug.LogError("Goal Not Found");
             return null;
         }
-        Debug.Log("RUTAAA1");
+        //Debug.Log("RUTAAA1");
         return CalculatePath(node);
     }
 
     private static ArrayList CalculatePath(Node node)
     {
-        Debug.Log("RUTAAA2");
+        //Debug.Log("RUTAAA2");
         ArrayList list = new ArrayList();
-        Debug.Log("RUTAAA2" + node);
+        //Debug.Log("RUTAAA2" + node);
         while (node != null)
         {
-            Debug.Log("entro");
+            //Debug.Log("entro");
             list.Add(node);
             node = node.parent;
         }
