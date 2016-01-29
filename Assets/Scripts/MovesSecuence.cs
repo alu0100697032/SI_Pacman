@@ -30,45 +30,11 @@ public class MovesSecuence : MonoBehaviour {
     }
     void FixedUpdate()
     {
-        //Si se encuentra en un cruce cambia al siguiente movimiento de la secuencia
-        if (cruce() || esquina())
-        {
-            stepSecuence++;
-        }
-        if (stepSecuence >= secuence.Length)
-            stepSecuence = 0;
-
-        //Fija el destino del pacman
-        if (secuence[stepSecuence] == "UP" && vecinos[0] != -1)
-        {
-            dest = position + Vector2.up;
-            vecinosCruce[0] = -1;
-        }
-        else if (secuence[stepSecuence] == "RIGHT" && vecinos[1] != -1)
-        {
-            dest = position + Vector2.right;
-            vecinosCruce[1] = -1;
-        }
-        else if (secuence[stepSecuence] == "DOWN" && vecinos[2] != -1)
-        {
-            dest = position + Vector2.down;
-            vecinosCruce[2] = -1;
-        }
-        else if (secuence[stepSecuence] == "LEFT" && vecinos[3] != -1)
-        {
-            dest = position + Vector2.left;
-            vecinosCruce[3] = -1;
-        }
-        else {
-            stepSecuence++;
-        }
-
         //Mueve el pacman teniendo en cuenta la velocidad
         float step = speed * Time.deltaTime;
         Vector2 dest2 = Vector2.MoveTowards(transform.localPosition, dest, step);
         transform.localPosition = dest2;
-        //Si ya ha llegado al destino actualiza los vecinos (solo en las posiciones enteras)
-        if ((dest2.x == position.x + 1) || (dest2.x == position.x - 1) || (dest2.y == position.y + 1) || (dest2.y == position.y - 1))
+        if ((Vector2)transform.localPosition == dest)
         {
             position = dest;
             if (mazeMS.GetComponent<nivel>().hayPastilla((int)position.x, (int)position.y))
@@ -79,8 +45,42 @@ public class MovesSecuence : MonoBehaviour {
             vecinos = mazeMS.GetComponent<nivel>().getVecinos((int)position.x, (int)position.y);
             vecinosCruce = (int[])vecinos.Clone();
             vecinosEsquina = (int[])vecinos.Clone();
+
+            //Si se encuentra en un cruce cambia al siguiente movimiento de la secuencia
+            if (cruce() || esquina())
+            {
+                stepSecuence++;
+            }
+            if (stepSecuence >= secuence.Length)
+                stepSecuence = 0;
+
+            //Fija el destino del pacman
+            if (secuence[stepSecuence] == "UP" && vecinos[0] != -1)
+            {
+                dest = position + Vector2.up;
+                vecinosCruce[0] = -1;
+            }
+            else if (secuence[stepSecuence] == "RIGHT" && vecinos[1] != -1)
+            {
+                dest = position + Vector2.right;
+                vecinosCruce[1] = -1;
+            }
+            else if (secuence[stepSecuence] == "DOWN" && vecinos[2] != -1)
+            {
+                dest = position + Vector2.down;
+                vecinosCruce[2] = -1;
+            }
+            else if (secuence[stepSecuence] == "LEFT" && vecinos[3] != -1)
+            {
+                dest = position + Vector2.left;
+                vecinosCruce[3] = -1;
+            }
+            else
+            {
+                stepSecuence++;
+            }
         }
-        
+
         // Anima al pacman
         Vector2 dir = dest - (Vector2)transform.localPosition;
         GetComponent<Animator>().SetFloat("DirX", dir.x);
