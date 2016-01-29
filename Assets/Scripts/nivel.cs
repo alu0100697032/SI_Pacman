@@ -4,8 +4,10 @@ using System.Collections;
 public class nivel : MonoBehaviour {
 
     public GameObject dotPrefab;
+    public GameObject pacman;
     private ArrayList dots;
     private Vector2[] ghosts;
+    private int nDots;
     private int[,] maze = { 
         {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 },
         {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 },
@@ -44,6 +46,7 @@ public class nivel : MonoBehaviour {
         instantiateMaze();
     }
     public void instantiateMaze() {
+        nDots = 0;
         mazeCopy = (int[,])maze.Clone();
         GameObject dot;
         dots = new ArrayList();
@@ -53,6 +56,7 @@ public class nivel : MonoBehaviour {
                 {
                     if (mazeCopy[i, j] == 1)
                     {
+                        nDots++;
                         dot = Instantiate(dotPrefab) as GameObject;
                         dot.transform.parent = this.transform;
                         dot.transform.localPosition = new Vector2(i, j);
@@ -148,7 +152,15 @@ public class nivel : MonoBehaviour {
     }
 
     public void eliminarPastilla(int x, int y) {
+        nDots--;
+        Debug.Log(nDots);
         mazeCopy[x, y] = 0;
+        if(nDots == 0)
+        {
+            pacman.GetComponent<pacmanLogic>().win();
+            GetComponent<enableGhostMove>().enabled = false;
+            GetComponent<enableGhostMove>().disableGhostMove();
+        }
     }
 
     public bool hayPastilla(int x, int y) {

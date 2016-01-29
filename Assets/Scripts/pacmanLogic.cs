@@ -8,7 +8,8 @@ public class pacmanLogic : MonoBehaviour {
     private int score;
     private Vector2 pacmanInitialPosition;
     public GameObject scoreText;
-    public GameObject gameOver;
+    public GameObject gameOverSprite;
+    public GameObject winSprite;
     public GameObject[] visualLives;
 
 	// Use this for initialization
@@ -26,18 +27,22 @@ public class pacmanLogic : MonoBehaviour {
         instantiatePacman();
         pacmanToInitalPosition();
         scoreUp(0);
-        gameOver.SetActive(false);
+        gameOverSprite.SetActive(false);
+        winSprite.SetActive(false);
         resetVisualLives();
         instantiatePacman();
     }
+
     void resetVisualLives() {
         for (int i = 0; i < visualLives.Length; i++)
             visualLives[i].SetActive(true);
     }
+
     public void pacmanToInitalPosition()
     {
         transform.localPosition = pacmanInitialPosition;
     }
+
     public void scoreUp(int pointScored) {
         score += pointScored;
         scoreText.GetComponent<Text>().text = "" + score;
@@ -50,8 +55,30 @@ public class pacmanLogic : MonoBehaviour {
             lives--;
         }if(lives == 0)//si no game over
         {
-            gameOver.SetActive(true);
+            gameOverSprite.SetActive(true);
             this.gameObject.SetActive(false);
+        }
+    }
+
+    public void win() {
+        if (gameObject.name == "pacmanMS")
+        {
+            winSprite.SetActive(true);
+            GetComponent<MovesSecuence>().enabled = false;
+        }
+        else if (gameObject.name == "pacmanPA")
+        {
+            winSprite.SetActive(true);
+            GetComponent<PATableMove>().enabled = false;
+        }
+        else if (gameObject.name == "pacmanAS")
+        {
+            winSprite.SetActive(true);
+            GetComponent<AStarMove>().enabled = false;
+        }
+        else if (gameObject.name == "pacmanNN")
+        {
+            winSprite.SetActive(true);
         }
     }
 
