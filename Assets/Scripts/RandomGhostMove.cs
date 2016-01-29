@@ -29,43 +29,43 @@ public class RandomGhostMove : MonoBehaviour {
         vecinos = maze.GetComponent<nivel>().getVecinos(ghostPosition);
     }
 
+    void updatePositions() {
+        ghostPosition = dest;
+        maze.GetComponent<nivel>().setGhosPosition(getGhostPosition(), idGhost);
+        vecinos = maze.GetComponent<nivel>().getVecinos(ghostPosition);
+    }
+
 	// Update is called once per frame
 	void FixedUpdate () {
+        float step = speed * Time.deltaTime;
+        Vector2 moving = Vector2.MoveTowards(transform.localPosition, dest, step);
+        transform.localPosition = moving;
 
-        if (insideHouse)
+        if ((Vector2)transform.localPosition == dest)
         {
-            float step = speed * Time.deltaTime;
-            Vector2 moving = Vector2.MoveTowards(transform.localPosition, dest, step);
-            transform.localPosition = moving;
-
-            if ((Vector2)transform.localPosition == new Vector2(15, 20))
+            if (insideHouse)
             {
-                insideHouse = false;
-                ghostPosition = dest;
-                maze.GetComponent<nivel>().setGhosPosition(getGhostPosition(), idGhost);
-                vecinos = maze.GetComponent<nivel>().getVecinos(ghostPosition);
-                //mover a derecha o a izquierda
-                System.Random random = new System.Random();
-                int randomNumber = random.Next(0, 2);
-                if (randomNumber == 0)
-                    direction = Vector2.right;
-                else if (randomNumber == 1)
-                    direction = Vector2.left;
+                if (dest == new Vector2(15, 20))
+                {
+                    insideHouse = false;
+                    updatePositions();
+                    //mover a derecha o a izquierda
+                    System.Random random = new System.Random();
+                    int randomNumber = random.Next(0, 2);
+                    if (randomNumber == 0)
+                        direction = Vector2.right;
+                    else if (randomNumber == 1)
+                        direction = Vector2.left;
+                }
+                else 
+                {
+                    updatePositions();
+                    dest = ghostPosition + Vector2.up;
+                }
             }
-            else if ((Vector2)transform.localPosition == dest)
+            else
             {
-                ghostPosition = dest;
-                maze.GetComponent<nivel>().setGhosPosition(getGhostPosition(), idGhost);
-                vecinos = maze.GetComponent<nivel>().getVecinos(ghostPosition);
-                dest = ghostPosition + Vector2.up;
-            }
-        }
-        else {
-            if ((Vector2)transform.localPosition == dest)
-            {
-                ghostPosition = dest;
-                maze.GetComponent<nivel>().setGhosPosition(getGhostPosition(), idGhost);
-                vecinos = maze.GetComponent<nivel>().getVecinos(ghostPosition);
+                updatePositions();
                 if (cruce() || esquina())
                 {
                     ArrayList directions = maze.GetComponent<nivel>().getAviableDirections(
@@ -76,10 +76,6 @@ public class RandomGhostMove : MonoBehaviour {
                 }
                 dest = ghostPosition + direction;
             }
-            
-            float step = speed * Time.deltaTime;
-            Vector2 moving = Vector2.MoveTowards(transform.localPosition, dest, step);
-            transform.localPosition = moving;
         }
         // Animation
         Vector2 dir = direction - (Vector2)transform.localPosition;
@@ -101,6 +97,7 @@ public class RandomGhostMove : MonoBehaviour {
         else
             return false;
     }
+
     //Devuelve true si se encuentra en una esquina
     public bool esquina()
     {
@@ -115,6 +112,7 @@ public class RandomGhostMove : MonoBehaviour {
         else
             return false;
     }
+
     public int getOpositeDirection(Vector2 currentDirection)
     {
         if (currentDirection == Vector2.up)
@@ -126,6 +124,7 @@ public class RandomGhostMove : MonoBehaviour {
         else
             return 1;
     }
+
     public Vector2 getGhostPosition() {
         return ghostPosition;
     }
