@@ -117,14 +117,14 @@ public class AStarMove : MonoBehaviour
                         openList.Add(neighbourNode);
                         openList.Sort();
                         
-                        Node tempd = (Node)openList[0];
+                        //Node tempd = (Node)openList[0];
                     }
                 }
             }
             //Push the current node to the closed list
             closedList.Add(node);
             closedList.Sort();
-            Node temp = (Node)closedList[0];
+            //Node temp = (Node)closedList[0];
             //and remove it from openList
             openList.Remove(node);
         }
