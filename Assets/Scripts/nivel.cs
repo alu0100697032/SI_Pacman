@@ -110,30 +110,10 @@ public class nivel : MonoBehaviour {
     }
     public int[] getVecinos(int posX, int posY) {
         int[] vecinos = new int[4];
-        if(isGhost(posX, posY + 1)){
-            vecinos[0] = -1;
-        }
-        else{
-            vecinos[0] = mazeCopy[posX, posY + 1];//arriba(derecha en realidad)
-        }
-        if (isGhost(posX + 1, posY)){
-            vecinos[1] = -1;
-        }
-        else{
-            vecinos[1] = mazeCopy[posX + 1, posY];//derecha
-        }
-        if (isGhost(posX, posY - 1)){
-            vecinos[2] = -1;
-        }
-        else{
-            vecinos[2] = mazeCopy[posX, posY - 1];//abajo
-        }
-        if (isGhost(posX - 1, posY)){
-            vecinos[3] = -1;
-        }
-        else{
-            vecinos[3] = mazeCopy[posX - 1, posY];//izquierda
-        }
+        vecinos[0] = mazeCopy[posX, posY + 1];//arriba
+        vecinos[1] = mazeCopy[posX + 1, posY];//derecha
+        vecinos[2] = mazeCopy[posX, posY - 1];//abajo
+        vecinos[3] = mazeCopy[posX - 1, posY];//izquierda
         return vecinos;
     }
     public bool isGhost(int x, int y) {
