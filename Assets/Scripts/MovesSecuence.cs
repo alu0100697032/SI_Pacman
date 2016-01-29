@@ -24,7 +24,7 @@ public class MovesSecuence : MonoBehaviour {
         secuence = inputField.GetComponent<InputField>().text.Split(' ');
         dest = (Vector2)transform.localPosition;
         position = dest;
-        vecinos = mazeMS.GetComponent<nivel>().getVecinos((int)position.x, (int)position.y);
+        vecinos = mazeMS.GetComponent<nivel>().getVecinos(position);
         vecinosCruce = (int[])vecinos.Clone();
         vecinosEsquina = (int[])vecinos.Clone();
     }
@@ -42,7 +42,7 @@ public class MovesSecuence : MonoBehaviour {
                 mazeMS.GetComponent<nivel>().eliminarPastilla((int)position.x, (int)position.y);
                 GetComponent<pacmanLogic>().scoreUp(10);
             }
-            vecinos = mazeMS.GetComponent<nivel>().getVecinos((int)position.x, (int)position.y);
+            vecinos = mazeMS.GetComponent<nivel>().getVecinos(position);
             vecinosCruce = (int[])vecinos.Clone();
             vecinosEsquina = (int[])vecinos.Clone();
 

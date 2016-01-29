@@ -26,7 +26,7 @@ public class RandomGhostMove : MonoBehaviour {
         dest = ghostPosition;
         transform.localPosition = ghostPosition;
         insideHouse = true;
-        vecinos = maze.GetComponent<nivel>().getVecinos((int)ghostPosition.x, (int)ghostPosition.y);
+        vecinos = maze.GetComponent<nivel>().getVecinos(ghostPosition);
     }
 
 	// Update is called once per frame
@@ -43,7 +43,7 @@ public class RandomGhostMove : MonoBehaviour {
                 insideHouse = false;
                 ghostPosition = dest;
                 maze.GetComponent<nivel>().setGhosPosition(getGhostPosition(), idGhost);
-                vecinos = maze.GetComponent<nivel>().getVecinos((int)ghostPosition.x, (int)ghostPosition.y);
+                vecinos = maze.GetComponent<nivel>().getVecinos(ghostPosition);
                 //mover a derecha o a izquierda
                 System.Random random = new System.Random();
                 int randomNumber = random.Next(0, 2);
@@ -56,7 +56,7 @@ public class RandomGhostMove : MonoBehaviour {
             {
                 ghostPosition = dest;
                 maze.GetComponent<nivel>().setGhosPosition(getGhostPosition(), idGhost);
-                vecinos = maze.GetComponent<nivel>().getVecinos((int)ghostPosition.x, (int)ghostPosition.y);
+                vecinos = maze.GetComponent<nivel>().getVecinos(ghostPosition);
                 dest = ghostPosition + Vector2.up;
             }
         }
@@ -65,7 +65,7 @@ public class RandomGhostMove : MonoBehaviour {
             {
                 ghostPosition = dest;
                 maze.GetComponent<nivel>().setGhosPosition(getGhostPosition(), idGhost);
-                vecinos = maze.GetComponent<nivel>().getVecinos((int)ghostPosition.x, (int)ghostPosition.y);
+                vecinos = maze.GetComponent<nivel>().getVecinos(ghostPosition);
                 if (cruce() || esquina())
                 {
                     ArrayList directions = maze.GetComponent<nivel>().getAviableDirections(

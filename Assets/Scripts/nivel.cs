@@ -108,12 +108,12 @@ public class nivel : MonoBehaviour {
             Destroy(dots[i] as GameObject);
         }
     }
-    public int[] getVecinos(int posX, int posY) {
+    public int[] getVecinos(Vector2 position) {
         int[] vecinos = new int[4];
-        vecinos[0] = mazeCopy[posX, posY + 1];//arriba
-        vecinos[1] = mazeCopy[posX + 1, posY];//derecha
-        vecinos[2] = mazeCopy[posX, posY - 1];//abajo
-        vecinos[3] = mazeCopy[posX - 1, posY];//izquierda
+        vecinos[0] = mazeCopy[(int)position.x, (int)position.y + 1];//arriba
+        vecinos[1] = mazeCopy[(int)position.x + 1, (int)position.y];//derecha
+        vecinos[2] = mazeCopy[(int)position.x, (int)position.y - 1];//abajo
+        vecinos[3] = mazeCopy[(int)position.x - 1, (int)position.y];//izquierda
         return vecinos;
     }
     public bool isGhost(int x, int y) {

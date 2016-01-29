@@ -19,7 +19,7 @@ public class PATableMove : MonoBehaviour {
         PATable = GetComponent<PATableConfigReader>().getPATable();
         dest = (Vector2)transform.localPosition;
         position = dest;
-        vecinos = maze.GetComponent<nivel>().getVecinos((int)position.x, (int)position.y);
+        vecinos = maze.GetComponent<nivel>().getVecinos(position);
         direction = Vector2.zero;
     }
     void FixedUpdate()
@@ -28,7 +28,7 @@ public class PATableMove : MonoBehaviour {
         float step = speed * Time.deltaTime;
         Vector2 dest2 = Vector2.MoveTowards(transform.localPosition, dest, step);
         transform.localPosition = dest2;
-        vecinos = maze.GetComponent<nivel>().getVecinos((int)position.x, (int)position.y);//borrar si hay mal comportamiento
+        vecinos = maze.GetComponent<nivel>().getVecinos(position);//borrar si hay mal comportamiento
 
         if ((Vector2)transform.localPosition == dest)
         {
@@ -38,7 +38,7 @@ public class PATableMove : MonoBehaviour {
                 maze.GetComponent<nivel>().eliminarPastilla((int)position.x, (int)position.y);
                 GetComponent<pacmanLogic>().scoreUp(10);
             }
-            vecinos = maze.GetComponent<nivel>().getVecinos((int)position.x, (int)position.y);
+            vecinos = maze.GetComponent<nivel>().getVecinos(position);
 
             if (existNearPills())
             {
