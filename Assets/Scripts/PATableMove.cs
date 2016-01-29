@@ -22,6 +22,7 @@ public class PATableMove : MonoBehaviour {
         vecinos = maze.GetComponent<nivel>().getVecinos(position);
         direction = Vector2.zero;
     }
+
     void FixedUpdate()
     {
         //Mueve el pacman teniendo en cuenta la velocidad

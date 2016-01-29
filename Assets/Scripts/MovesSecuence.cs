@@ -21,12 +21,15 @@ public class MovesSecuence : MonoBehaviour {
     }
     public void resetMovesSecuence() {
         stepSecuence = 0;
-        secuence = inputField.GetComponent<InputField>().text.Split(' ');
+        readImputField();
         dest = (Vector2)transform.localPosition;
         position = dest;
         vecinos = mazeMS.GetComponent<nivel>().getVecinos(position);
         vecinosCruce = (int[])vecinos.Clone();
         vecinosEsquina = (int[])vecinos.Clone();
+    }
+    void readImputField() {
+        secuence = inputField.GetComponent<InputField>().text.Split(' ');
     }
     void FixedUpdate()
     {
