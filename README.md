@@ -17,7 +17,7 @@ Elaboración de un agente inteligente para el juego de Ms. Pac-Man utilizando di
 + **PACMAN basado en una Secuencia de movimientos,**
   * Definimos un agente inteligente `PacMan` que intentará resolver el laberinto de una manera pre-programada.
 
-+ **PACMAN basado en una tabla de Persepción-Acción,**
++ **PACMAN basado en una tabla de Percepción-Acción,**
   * Definimos un agente inteligente `PacMan` que intentará resolver el laberinto de una manera pre-programada.
 
 + **PACMAN basado en el algoritmo A*,**
@@ -60,7 +60,6 @@ Programación en Java, Inteligencia Artificial, Minería de Datos.
 * Q-Learning
 
 ## Desarrollo
-TRello???
 
 ## Problemas encontrados
 ## Funcionamiento
