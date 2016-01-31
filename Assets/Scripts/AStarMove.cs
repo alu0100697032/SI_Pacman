@@ -50,7 +50,7 @@ public class AStarMove : MonoBehaviour
         Vector2 dest2 = Vector2.MoveTowards(transform.localPosition, dest, step);
         transform.localPosition = dest2;
         //Si ya ha llegado al destino actualiza los vecinos (solo en las posiciones enteras)
-        if ((dest2.x == position.x + 1) || (dest2.x == position.x - 1) || (dest2.y == position.y + 1) || (dest2.y == position.y - 1))
+        if ((Vector2)transform.localPosition == dest)
         {
             position = dest;
             if (maze.GetComponent<nivel>().hayPastilla((int)position.x, (int)position.y))
@@ -64,9 +64,7 @@ public class AStarMove : MonoBehaviour
                 stepSecuence = 1;
                 existsPath = false;
             }
-
         }
-
         // Anima al pacman
         Vector2 dir = dest - (Vector2)transform.localPosition;
         GetComponent<Animator>().SetFloat("DirX", dir.x);
@@ -119,14 +117,14 @@ public class AStarMove : MonoBehaviour
                         openList.Add(neighbourNode);
                         openList.Sort();
                         
-                        Node tempd = (Node)openList[0];
+                        //Node tempd = (Node)openList[0];
                     }
                 }
             }
             //Push the current node to the closed list
             closedList.Add(node);
             closedList.Sort();
-            Node temp = (Node)closedList[0];
+            //Node temp = (Node)closedList[0];
             //and remove it from openList
             openList.Remove(node);
         }
