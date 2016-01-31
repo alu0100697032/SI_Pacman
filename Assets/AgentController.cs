@@ -4,12 +4,7 @@ using Behave.Runtime;
 using Tree = Behave.Runtime.Tree;
 using System;
 
-public interface IAgent
-{
-    BehaveResult Tick(Tree sender, bool init);
-    void Reset(Tree sender);
-    int SelectTopPriority(Tree sender, params int[] IDs);
-}
+
 
 public class AgentController : MonoBehaviour, IAgent
 {
@@ -18,7 +13,7 @@ public class AgentController : MonoBehaviour, IAgent
     IEnumerator Start()
     {
         m_Tree = BLAgentBehaveLib.InstantiateTree(
-        BLAgentBehaveLib.TreeType.NewCollection1_NewTree1, (Behave.Runtime.IAgent)this);
+        BLAgentBehaveLib.TreeType.NewCollection1_NewTree1, this);
         while (Application.isPlaying && m_Tree != null)
         {
             yield return new
