@@ -26,13 +26,13 @@ public class RandomGhostMove : MonoBehaviour {
         dest = ghostPosition;
         transform.localPosition = ghostPosition;
         insideHouse = true;
-        vecinos = maze.GetComponent<nivel>().getVecinos(ghostPosition);
+        vecinos = maze.GetComponent<nivel>().getVecinosGhosts(ghostPosition);
     }
 
     void updatePositions() {
         ghostPosition = dest;
         maze.GetComponent<nivel>().setGhosPosition(getGhostPosition(), idGhost);
-        vecinos = maze.GetComponent<nivel>().getVecinos(ghostPosition);
+        vecinos = maze.GetComponent<nivel>().getVecinosGhosts(ghostPosition);
     }
 
 	// Update is called once per frame
