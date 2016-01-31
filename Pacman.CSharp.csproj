@@ -57,30 +57,43 @@
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Networking">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
+    <Reference Include="AgentBehaveLibBuild">
+      <HintPath>Assets\AgentBehaveLibBuild.dll</HintPath>
+    </Reference>
+    <Reference Include="Behave.Unity.Assets">
+      <HintPath>Assets\Behave\Behave.Unity.Assets.dll</HintPath>
+    </Reference>
+    <Reference Include="Behave.Unity.Runtime">
+      <HintPath>Assets\Behave\Behave.Unity.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Behave">
+      <HintPath>Assets\Behave\Compatibility\Behave.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\AStarMove.cs" />
-    <Compile Include="Assets\GhostMove.cs" />
-    <Compile Include="Assets\MoveSecuenceConfigReader.cs" />
-    <Compile Include="Assets\MovesSecuence.cs" />
-    <Compile Include="Assets\PATableConfigReader.cs" />
-    <Compile Include="Assets\PATableMove.cs" />
-    <Compile Include="Assets\Pacdot.cs" />
-    <Compile Include="Assets\PacmanMove.cs" />
-    <Compile Include="Assets\nivel.cs" />
-    <Compile Include="Assets\pacmanLogic.cs" />
-    <Compile Include="Assets\simpleMovement.cs" />
+    <Compile Include="Assets\AgentController.cs" />
+    <Compile Include="Assets\Behave\BehaveAsset.cs" />
+    <Compile Include="Assets\Scripts\AStarMove.cs" />
+    <Compile Include="Assets\Scripts\Deprecated\GhostMove.cs" />
+    <Compile Include="Assets\Scripts\Deprecated\MoveSecuenceConfigReader.cs" />
+    <Compile Include="Assets\Scripts\Deprecated\PacmanMove.cs" />
+    <Compile Include="Assets\Scripts\MovesSecuence.cs" />
+    <Compile Include="Assets\Scripts\Node.cs" />
+    <Compile Include="Assets\Scripts\PATableConfigReader.cs" />
+    <Compile Include="Assets\Scripts\PATableMove.cs" />
+    <Compile Include="Assets\Scripts\RandomGhostMove.cs" />
+    <Compile Include="Assets\Scripts\eatPacman.cs" />
+    <Compile Include="Assets\Scripts\enableGhostMove.cs" />
+    <Compile Include="Assets\Scripts\nivel.cs" />
+    <Compile Include="Assets\Scripts\pacmanLogic.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Behave\Changelog.txt" />
+    <None Include="Assets\Behave\License.txt" />
+    <None Include="Assets\Behave\Readme.txt" />
     <None Include="Assets\Config\PATableConfig.txt" />
     <None Include="Assets\Config\moveSecuenceConfig.txt" />
   </ItemGroup>
