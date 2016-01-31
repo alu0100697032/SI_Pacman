@@ -1,0 +1,30 @@
+fileFormatVersion: 2
+guid: e6d27a4afce230f42b35ea3766ff3da3
+labels:
+- Behave
+- AI
+- behaviour
+- artificial
+- intelligence
+- bot
+- robot
+PluginImporter:
+  serializedVersion: 1
+  iconMap: {}
+  executionOrder: {}
+  isPreloaded: 0
+  platformData:
+    Any:
+      enabled: 0
+      settings: {}
+    Editor:
+      enabled: 1
+      settings:
+        DefaultValueInitialized: true
+    WindowsStoreApps:
+      enabled: 0
+      settings:
+        CPU: AnyCPU
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,41 @@
+Library class:
+BLAgentBehaveLib
+
+Trees:
+	NewCollection1_PrioritySelector
+	NewCollection1_Sequence
+	NewCollection1_Decorator
+	NewCollection1_Selector
+	NewCollection1_Parallel
+	Unknown
+
+Contexts:
+	Unknown
+
+Branch priority groups:
+	EatPriority
+	SleepPriority
+	PlayPriority
+	Unknown
+
+Actions (13: 1 - 14):
+	Eat (1)
+	Sleep (2)
+	Play (3)
+	FadeIn (4)
+	FadeOut (5)
+	GotoGame (6)
+	MyAction (7)
+	Patrol (8)
+	Attack (9)
+	Idle (10)
+	CheckEmail (11)
+	ListenMusic (12)
+	Work (13)
+	Unknown (14)
+
+Decorators (1: 15 - 16):
+	ShouldDoMyAction (15)
+	Unknown (16)
+
+Agent classes:

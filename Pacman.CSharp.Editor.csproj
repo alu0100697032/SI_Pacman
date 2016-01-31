@@ -88,19 +88,19 @@
       <HintPath>Library\UnityAssemblies\SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
     <Reference Include="AgentBehaveLibBuild">
-      <HintPath>Assets\AgentBehaveLibBuild.dll</HintPath>
-    </Reference>
-    <Reference Include="Behave.Unity.Assets">
-      <HintPath>Assets\Behave\Behave.Unity.Assets.dll</HintPath>
-    </Reference>
-    <Reference Include="Behave.Unity.Runtime">
-      <HintPath>Assets\Behave\Behave.Unity.Runtime.dll</HintPath>
+      <HintPath>Assets\BehaveTree\Behaviours\AgentBehaveLibBuild.dll</HintPath>
     </Reference>
     <Reference Include="Behave">
-      <HintPath>Assets\Behave\Compatibility\Behave.dll</HintPath>
+      <HintPath>Assets\BehaveTree\Behave\Compatibility\Behave.dll</HintPath>
+    </Reference>
+    <Reference Include="Behave.Unity.Assets">
+      <HintPath>Assets\BehaveTree\Behave\Behave.Unity.Assets.dll</HintPath>
+    </Reference>
+    <Reference Include="Behave.Unity.Runtime">
+      <HintPath>Assets\BehaveTree\Behave\Behave.Unity.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Behave.Unity.Editor">
-      <HintPath>Assets\Behave\Editor\Behave.Unity.Editor.dll</HintPath>
+      <HintPath>Assets\BehaveTree\Behave\Editor\Behave.Unity.Editor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -110,19 +110,20 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Behave\Editor\BehaveAbout.cs" />
-    <Compile Include="Assets\Behave\Editor\BehaveAssetEditor.cs" />
-    <Compile Include="Assets\Behave\Editor\BehaveBrowser.cs" />
-    <Compile Include="Assets\Behave\Editor\BehaveComponentEditor.cs" />
-    <Compile Include="Assets\Behave\Editor\BehaveDebugWindow.cs" />
-    <Compile Include="Assets\Behave\Editor\BehaveEditor.cs" />
-    <Compile Include="Assets\Behave\Editor\BehaveMenu.cs" />
-    <Compile Include="Assets\Behave\Editor\BehaveTreeEditor.cs" />
+    <Compile Include="Assets\BehaveTree\Behave\Editor\BehaveAbout.cs" />
+    <Compile Include="Assets\BehaveTree\Behave\Editor\BehaveAssetEditor.cs" />
+    <Compile Include="Assets\BehaveTree\Behave\Editor\BehaveBrowser.cs" />
+    <Compile Include="Assets\BehaveTree\Behave\Editor\BehaveComponentEditor.cs" />
+    <Compile Include="Assets\BehaveTree\Behave\Editor\BehaveDebugWindow.cs" />
+    <Compile Include="Assets\BehaveTree\Behave\Editor\BehaveEditor.cs" />
+    <Compile Include="Assets\BehaveTree\Behave\Editor\BehaveMenu.cs" />
+    <Compile Include="Assets\BehaveTree\Behave\Editor\BehaveTreeEditor.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Behave\Changelog.txt" />
-    <None Include="Assets\Behave\License.txt" />
-    <None Include="Assets\Behave\Readme.txt" />
+    <None Include="Assets\BehaveTree\Behave\Changelog.txt" />
+    <None Include="Assets\BehaveTree\Behave\License.txt" />
+    <None Include="Assets\BehaveTree\Behave\Readme.txt" />
+    <None Include="Assets\BehaveTree\Behaviours\AgentBehaveLibInfo.txt" />
     <None Include="Assets\Config\PATableConfig.txt" />
     <None Include="Assets\Config\moveSecuenceConfig.txt" />
   </ItemGroup>
