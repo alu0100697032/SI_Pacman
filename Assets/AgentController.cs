@@ -27,6 +27,13 @@ public class AgentController : MonoBehaviour, IAgent
         m_Tree.Tick();
     }
 
+    public BehaveResult TickMyActionAction(Tree sender)
+    {
+        Debug.Log("MyAction ticked!");
+        return BehaveResult.Success;
+    }
+
+
     public BehaveResult Tick(Tree sender, bool init)
     {
         Debug.Log("Ticked Received by unhandled " +
