@@ -32,7 +32,7 @@ public class AStarMove : MonoBehaviour
     // Update
     void FixedUpdate()
     {
-        if (!existsPath) {
+        /*if (!existsPath) {
             Node a = new Node(position);
             Node b = new Node(maze.GetComponent<nivel>().getClosestPill(position));
             currentPath = FindPath(a, b);
@@ -46,6 +46,16 @@ public class AStarMove : MonoBehaviour
         if (existsPath)
         {
             Node nod = (Node)currentPath[stepSecuence];
+            dest = (Vector2)nod.position;
+        }*/
+        Node a = new Node(position);
+        Node b = new Node(maze.GetComponent<nivel>().getClosestPill(position));
+        currentPath = FindPath(a, b);
+        if (currentPath.Count > 0)
+        {
+            Node lastNode = (Node)currentPath[currentPath.Count - 1];
+            aStarDest = (Vector2)lastNode.position;
+            Node nod = (Node)currentPath[1];
             dest = (Vector2)nod.position;
         }
         //Mueve el pacman teniendo en cuenta la velocidad

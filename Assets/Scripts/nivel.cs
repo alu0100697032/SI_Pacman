@@ -123,7 +123,6 @@ public class nivel : MonoBehaviour {
                     (position.y == ghosts[j].y && position.x + 2 == ghosts[j].x) ||
                     (position.y == ghosts[j].y && (position.x - 2) == ghosts[j].x))
                 {
-                    Debug.Log("funciona");
                     vecinos[i] = -1;
                     break;
                 }
@@ -175,10 +174,23 @@ public class nivel : MonoBehaviour {
     public ArrayList getAviableDirectionsGhost(int[] vecinos, int opositeDirection)
     {
         ArrayList directionsAviable = new ArrayList();
-        if (vecinos[0] != -1 && opositeDirection != 0) { directionsAviable.Add(Vector2.up); }  // UP
-        if (vecinos[1] != -1 && opositeDirection != 1) { directionsAviable.Add(Vector2.right); }  // RIGHT
-        if (vecinos[2] != -1 && opositeDirection != 2) { directionsAviable.Add(Vector2.down); }  // DOWN
-        if (vecinos[3] != -1 && opositeDirection != 3) { directionsAviable.Add(Vector2.left); }  // LEFT
+        int aux = 0;
+        for (int i = 0; i < 4; i++)
+            if (vecinos[i] != -1)
+                aux++;
+        if (aux > 1)
+        {
+            if (vecinos[0] != -1 && opositeDirection != 0) { directionsAviable.Add(Vector2.up); }  // UP
+            if (vecinos[1] != -1 && opositeDirection != 1) { directionsAviable.Add(Vector2.right); }  // RIGHT
+            if (vecinos[2] != -1 && opositeDirection != 2) { directionsAviable.Add(Vector2.down); }  // DOWN
+            if (vecinos[3] != -1 && opositeDirection != 3) { directionsAviable.Add(Vector2.left); }  // LEFT
+        }
+        else {
+            if (vecinos[0] != -1) { directionsAviable.Add(Vector2.up); }  // UP
+            if (vecinos[1] != -1) { directionsAviable.Add(Vector2.right); }  // RIGHT
+            if (vecinos[2] != -1) { directionsAviable.Add(Vector2.down); }  // DOWN
+            if (vecinos[3] != -1) { directionsAviable.Add(Vector2.left); }  // LEFT
+        }
         return directionsAviable;
     }
     public ArrayList getNeighbours(int posX, int posY)
