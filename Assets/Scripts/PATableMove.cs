@@ -104,8 +104,8 @@ public class PATableMove : MonoBehaviour {
     public void randomMove() {
         if (cruce() || esquina() || direction == Vector2.zero)
         {
-            ArrayList directions = maze.GetComponent<nivel>().getAviableDirections(
-                (int)position.x, (int)position.y, getOpositeDirection(direction));
+            ArrayList directions = maze.GetComponent<nivel>().getAviableDirectionsGhost(
+                vecinos, getOpositeDirection(direction));
             System.Random random = new System.Random();
             if (directions.Count > 0)
             {

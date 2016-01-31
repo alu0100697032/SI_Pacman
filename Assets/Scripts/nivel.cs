@@ -4,8 +4,10 @@ using System.Collections;
 public class nivel : MonoBehaviour {
 
     public GameObject dotPrefab;
+    public GameObject pacman;
     private ArrayList dots;
     private Vector2[] ghosts;
+    private int nDots;
     private int[,] maze = { 
         {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 },
         {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 },
@@ -44,6 +46,7 @@ public class nivel : MonoBehaviour {
         instantiateMaze();
     }
     public void instantiateMaze() {
+        nDots = 0;
         mazeCopy = (int[,])maze.Clone();
         GameObject dot;
         dots = new ArrayList();
@@ -53,6 +56,7 @@ public class nivel : MonoBehaviour {
                 {
                     if (mazeCopy[i, j] == 1)
                     {
+                        nDots++;
                         dot = Instantiate(dotPrefab) as GameObject;
                         dot.transform.parent = this.transform;
                         dot.transform.localPosition = new Vector2(i, j);
@@ -88,7 +92,7 @@ public class nivel : MonoBehaviour {
             for (int j = 2; j < 33-2; j++)
             {
                 {
-                    if (mazeCopy[i, j] == 1)
+                    if (mazeCopy[i, j] == 1 && isGhost(i, j) == false)
                     {
                         Vector2 pillPosition = new Vector2(i, j);
                         float currentDist = (pacman - pillPosition).magnitude;
@@ -110,6 +114,37 @@ public class nivel : MonoBehaviour {
     }
     public int[] getVecinos(Vector2 position) {
         int[] vecinos = new int[4];
+        for (int i = 0; i < 4; i++)
+        {
+            for (int j = 0; j < 4; j++)
+            {
+                if (((position.y + 2) == ghosts[j].y && position.x == ghosts[j].x) ||
+                    ((position.y - 2) == ghosts[j].y && position.x == ghosts[j].x) ||
+                    (position.y == ghosts[j].y && position.x + 2 == ghosts[j].x) ||
+                    (position.y == ghosts[j].y && (position.x - 2) == ghosts[j].x))
+                {
+                    vecinos[i] = -1;
+                    break;
+                }
+                else
+                {
+                    if(i == 0)
+                        vecinos[i] = mazeCopy[(int)position.x, (int)position.y + 1];//arriba
+                    else if(i == 1)
+                        vecinos[i] = mazeCopy[(int)position.x + 1, (int)position.y];//derecha
+                    else if (i == 2)
+                        vecinos[i] = mazeCopy[(int)position.x, (int)position.y - 1];//abajo
+                    else if(i == 3)
+                        vecinos[i] = mazeCopy[(int)position.x - 1, (int)position.y];//izquierda
+                }
+            }
+        }
+        
+        return vecinos;
+    }
+    public int[] getVecinosGhosts(Vector2 position)
+    {
+        int[] vecinos = new int[4];
         vecinos[0] = mazeCopy[(int)position.x, (int)position.y + 1];//arriba
         vecinos[1] = mazeCopy[(int)position.x + 1, (int)position.y];//derecha
         vecinos[2] = mazeCopy[(int)position.x, (int)position.y - 1];//abajo
@@ -119,7 +154,7 @@ public class nivel : MonoBehaviour {
     public bool isGhost(int x, int y) {
         bool isGhost = false;
         for (int i = 0; i < ghosts.Length; i++){
-            if(ghosts[i].x == x || ghosts[i].y == y)
+            if(ghosts[i].x == x && ghosts[i].y == y)
             {
                 isGhost = true;
                 break;
@@ -136,19 +171,47 @@ public class nivel : MonoBehaviour {
         if (mazeCopy[posX - 1, posY] != -1 && opositeDirection != 3) { directionsAviable.Add(Vector2.left); }  // LEFT
         return directionsAviable;
     }
-
+    public ArrayList getAviableDirectionsGhost(int[] vecinos, int opositeDirection)
+    {
+        ArrayList directionsAviable = new ArrayList();
+        int aux = 0;
+        for (int i = 0; i < 4; i++)
+            if (vecinos[i] != -1)
+                aux++;
+        if (aux > 1)
+        {
+            if (vecinos[0] != -1 && opositeDirection != 0) { directionsAviable.Add(Vector2.up); }  // UP
+            if (vecinos[1] != -1 && opositeDirection != 1) { directionsAviable.Add(Vector2.right); }  // RIGHT
+            if (vecinos[2] != -1 && opositeDirection != 2) { directionsAviable.Add(Vector2.down); }  // DOWN
+            if (vecinos[3] != -1 && opositeDirection != 3) { directionsAviable.Add(Vector2.left); }  // LEFT
+        }
+        else {
+            if (vecinos[0] != -1) { directionsAviable.Add(Vector2.up); }  // UP
+            if (vecinos[1] != -1) { directionsAviable.Add(Vector2.right); }  // RIGHT
+            if (vecinos[2] != -1) { directionsAviable.Add(Vector2.down); }  // DOWN
+            if (vecinos[3] != -1) { directionsAviable.Add(Vector2.left); }  // LEFT
+        }
+        return directionsAviable;
+    }
     public ArrayList getNeighbours(int posX, int posY)
     {
         ArrayList Neighbours = new ArrayList();
-        if (mazeCopy[posX, posY + 1] != -1) { Neighbours.Add(new Vector3(posX, posY + 1, 0)); }  // UP
-        if (mazeCopy[posX + 1, posY] != -1) { Neighbours.Add(new Vector3(posX + 1, posY, 0)); }  // RIGHT
-        if (mazeCopy[posX, posY - 1] != -1) { Neighbours.Add(new Vector3(posX, posY - 1, 0)); }  // DOWN
-        if (mazeCopy[posX - 1, posY] != -1) { Neighbours.Add(new Vector3(posX - 1, posY, 0)); }  // LEFT
+        if (mazeCopy[posX, posY + 1] != -1 && isGhost(posX, posY + 1) == false) { Neighbours.Add(new Vector3(posX, posY + 1, 0)); }  // UP
+        if (mazeCopy[posX + 1, posY] != -1 && isGhost(posX + 1, posY) == false) { Neighbours.Add(new Vector3(posX + 1, posY, 0)); }  // RIGHT
+        if (mazeCopy[posX, posY - 1] != -1 && isGhost(posX, posY - 1) == false) { Neighbours.Add(new Vector3(posX, posY - 1, 0)); }  // DOWN
+        if (mazeCopy[posX - 1, posY] != -1 && isGhost(posX - 1, posY) == false) { Neighbours.Add(new Vector3(posX - 1, posY, 0)); }  // LEFT
         return Neighbours;
     }
 
     public void eliminarPastilla(int x, int y) {
+        nDots--;
         mazeCopy[x, y] = 0;
+        if(nDots == 0)
+        {
+            pacman.GetComponent<pacmanLogic>().win();
+            GetComponent<enableGhostMove>().enabled = false;
+            GetComponent<enableGhostMove>().disableGhostMove();
+        }
     }
 
     public bool hayPastilla(int x, int y) {
