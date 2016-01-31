@@ -13,7 +13,7 @@ public class AStarMove : MonoBehaviour
     private ArrayList openList;
     private ArrayList closedList;
     private int stepSecuence;
-    private ArrayList path;
+    private ArrayList currentPath;
     private bool existsPath;
     private Vector2 aStarDest;
 
@@ -35,14 +35,17 @@ public class AStarMove : MonoBehaviour
         if (!existsPath) {
             Node a = new Node(position);
             Node b = new Node(maze.GetComponent<nivel>().getClosestPill(position));
-            path = FindPath(a, b);
-            Node lastNode = (Node)path[path.Count - 1];
-            aStarDest = (Vector2)lastNode.position;
-            existsPath = true;
+            currentPath = FindPath(a, b);
+            if (currentPath.Count > 0)
+            {
+                Node lastNode = (Node)currentPath[currentPath.Count - 1];
+                aStarDest = (Vector2)lastNode.position;
+                existsPath = true;
+            }
         }
         if (existsPath)
         {
-            Node nod = (Node)path[stepSecuence];
+            Node nod = (Node)currentPath[stepSecuence];
             dest = (Vector2)nod.position;
         }
         //Mueve el pacman teniendo en cuenta la velocidad
@@ -58,7 +61,7 @@ public class AStarMove : MonoBehaviour
                 maze.GetComponent<nivel>().eliminarPastilla((int)position.x, (int)position.y);
                 GetComponent<pacmanLogic>().scoreUp(10);
             }
-            if(stepSecuence < path.Count-1)
+            if(stepSecuence < currentPath.Count-1)
                 stepSecuence++;
             if (aStarDest == position) {
                 stepSecuence = 1;

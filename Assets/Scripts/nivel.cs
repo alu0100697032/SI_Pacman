@@ -92,7 +92,7 @@ public class nivel : MonoBehaviour {
             for (int j = 2; j < 33-2; j++)
             {
                 {
-                    if (mazeCopy[i, j] == 1)
+                    if (mazeCopy[i, j] == 1 && isGhost(i, j) == false)
                     {
                         Vector2 pillPosition = new Vector2(i, j);
                         float currentDist = (pacman - pillPosition).magnitude;
@@ -155,7 +155,7 @@ public class nivel : MonoBehaviour {
     public bool isGhost(int x, int y) {
         bool isGhost = false;
         for (int i = 0; i < ghosts.Length; i++){
-            if(ghosts[i].x == x || ghosts[i].y == y)
+            if(ghosts[i].x == x && ghosts[i].y == y)
             {
                 isGhost = true;
                 break;
@@ -184,10 +184,10 @@ public class nivel : MonoBehaviour {
     public ArrayList getNeighbours(int posX, int posY)
     {
         ArrayList Neighbours = new ArrayList();
-        if (mazeCopy[posX, posY + 1] != -1) { Neighbours.Add(new Vector3(posX, posY + 1, 0)); }  // UP
-        if (mazeCopy[posX + 1, posY] != -1) { Neighbours.Add(new Vector3(posX + 1, posY, 0)); }  // RIGHT
-        if (mazeCopy[posX, posY - 1] != -1) { Neighbours.Add(new Vector3(posX, posY - 1, 0)); }  // DOWN
-        if (mazeCopy[posX - 1, posY] != -1) { Neighbours.Add(new Vector3(posX - 1, posY, 0)); }  // LEFT
+        if (mazeCopy[posX, posY + 1] != -1 && isGhost(posX, posY + 1) == false) { Neighbours.Add(new Vector3(posX, posY + 1, 0)); }  // UP
+        if (mazeCopy[posX + 1, posY] != -1 && isGhost(posX + 1, posY) == false) { Neighbours.Add(new Vector3(posX + 1, posY, 0)); }  // RIGHT
+        if (mazeCopy[posX, posY - 1] != -1 && isGhost(posX, posY - 1) == false) { Neighbours.Add(new Vector3(posX, posY - 1, 0)); }  // DOWN
+        if (mazeCopy[posX - 1, posY] != -1 && isGhost(posX - 1, posY) == false) { Neighbours.Add(new Vector3(posX - 1, posY, 0)); }  // LEFT
         return Neighbours;
     }
 
