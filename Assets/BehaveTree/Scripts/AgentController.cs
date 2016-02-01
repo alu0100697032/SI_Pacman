@@ -41,7 +41,17 @@ public class AgentController : MonoBehaviour, IAgent
             AIUpdate();
         }
     }
+    public void reset()
+    {
+        stepSecuence = 1;
+        existsPath = false;
+        aStarDest = Vector2.zero;
+        dest = (Vector2)transform.localPosition;
+        position = dest;
+        vecinos = maze.GetComponent<nivel>().getVecinos(position);
+        direction = Vector2.zero;
 
+    }
     void AIUpdate()
     {
         m_Tree.Tick();
