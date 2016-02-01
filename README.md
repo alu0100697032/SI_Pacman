@@ -56,7 +56,7 @@ Un inconveniente típico de este sistema es que la tabla puede ser enorme y dif�
 Definimos un agente inteligente `PacMan` que reemplazará al ser humano reproduciendo una simplicada versión deL juego. El único objetivo será perseguir las píldoras. Para ello hará uso del A* para perseguir la más cercana. Además si el fantasma se cruza en la trayectoria del pacman este cambiará la trayectoria.
 
 
-####  **PACMAN basado en un arbol de comportamiento,**
+####  **PACMAN basado en un arbol de comportamiento:**
 
   ![](pacman4.JPG)
 
@@ -69,7 +69,9 @@ Definimos un agente inteligente `PacMan` que simula un comportamiento simple med
 Hemos establecido la posibilidad de modificar los diferentes archivos de configuración del agente inteligente Pacman. Con esto podremos determinar la mejor arquitectura para realizar una partida perfecta.
 
 
-## Proyectos similares
+## PROYECTOS SIMILARES
+MS. Pacman
+
 
 #### Wikipedia
  https://es.wikipedia.org/wiki/Pac-Man
@@ -102,7 +104,17 @@ https://github.com/MazeSolver/MazeSolver
 A lo largo del proyecto nos hemos topado con diferentes problemas, entre los cuales destacamos:
 + Dificultades con la idea general planteada.
 + Implementación desde 0 del juego Pacman.
++ Aprendizaje de librerias externas.
++ Tiempo limitado.
 
+
+## POSIBLES MEJORAS
++ Implementación de píldoras de poder.
++ Implementación de varios niveles.
++ Implementación de fantasmas inteligentes.
++ Mejorar los algoritmos para que perciban mejor a los fantasmas.
++ Implementar un árbol de comportamiento más complejo.
++ Añadir los sonidos típicos del juego.
 
 ## Funcionamiento
 Tenemos un archivo ejecutable para Windows con el cual el usuario lo podrá ejecutar.
