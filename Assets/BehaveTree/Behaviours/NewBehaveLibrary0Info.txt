@@ -1,0 +1,21 @@
+Library class:
+BLNewBehaveLibrary0
+
+Trees:
+	NewCollection1_NewTree1
+	Unknown
+
+Contexts:
+	Unknown
+
+Branch priority groups:
+	Unknown
+
+Actions (1: 1 - 2):
+	New_action (1)
+	Unknown (2)
+
+Decorators (0: 3 - 3):
+	Unknown (3)
+
+Agent classes:

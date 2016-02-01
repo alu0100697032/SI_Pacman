@@ -9,7 +9,7 @@ public class AgentController : MonoBehaviour, IAgent {
 	
 	IEnumerator Start () 
 	{
-		m_Tree = BLAgentBehaveLib.InstantiateTree(BLAgentBehaveLib.TreeType.NewCollection1_Parallel, this);
+		m_Tree = BLNewBehaveLibrary0.InstantiateTree(BLNewBehaveLibrary0.TreeType.NewCollection1_NewTree1, this);
 		
 		while (Application.isPlaying && m_Tree != null) 
 		{
@@ -26,9 +26,9 @@ public class AgentController : MonoBehaviour, IAgent {
 	public BehaveResult Tick(Tree sender, bool init) 
 	{		
         Debug.Log("Ticked Received by unhandled " +
-            (BLAgentBehaveLib.IsAction(sender.ActiveID) ? "Action " : "Decorator ") + " ... " +
-            (BLAgentBehaveLib.IsAction(sender.ActiveID) ? ((BLAgentBehaveLib.ActionType)sender.ActiveID).ToString() :
-            ((BLAgentBehaveLib.DecoratorType)sender.ActiveID).ToString())
+            (BLNewBehaveLibrary0.IsAction(sender.ActiveID) ? "Action " : "Decorator ") + " ... " +
+            (BLNewBehaveLibrary0.IsAction(sender.ActiveID) ? ((BLNewBehaveLibrary0.ActionType)sender.ActiveID).ToString() :
+            ((BLNewBehaveLibrary0.DecoratorType)sender.ActiveID).ToString())
         );
 		return BehaveResult.Success;
 	}
@@ -116,14 +116,14 @@ public class AgentController : MonoBehaviour, IAgent {
 	}
 	
 	private bool shouldDo = true;
-	
-	public BehaveResult TickMyActionAction (Tree sender)
-	{
-		Debug.Log ("MyAction ticked!");		
-		return BehaveResult.Success;
-	}
-	
-	public BehaveResult TickShouldDoMyActionDecorator (Tree sender)
+
+    public BehaveResult TickNew_actionAction(Tree sender)
+    {
+        Debug.Log("MyAction ticked!");
+        return BehaveResult.Success;
+    }
+
+    public BehaveResult TickShouldDoMyActionDecorator (Tree sender)
 	{
 		shouldDo = !shouldDo;
 		if (shouldDo) {
