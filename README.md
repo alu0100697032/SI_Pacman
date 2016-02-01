@@ -2,6 +2,8 @@
 
 Este proyecto ha sido desarrollado para la asignatura de **Sistemas Inteligentes** del itinerario de computación del **_Grado en Ingeniería Informática_** de la **ULL**.  
 
+> **NOTA:** El README.md será el informe a entregar.
+
 ![](images/pacman.JPG)
 
 ## MIEMBROS DEL GRUPO
@@ -81,27 +83,35 @@ Hemos establecido la posibilidad de modificar los diferentes archivos de configu
 
 ## PROYECTOS SIMILARES
 
+
+
+
+#### OnLine
++ MS. Pacman ([URL](http://cswww.essex.ac.uk/staff/sml/pacman/PacManContest.html))
+
+#### Vídeos
++ Pacman agent using AI ([URL](https://www.youtube.com/watch?v=46hjf_x_0VU  ))
++ Playing Pacman using AIXI Approximation ([URL](https://www.youtube.com/watch?v=yfsMHtmGDKEm))   
++ Pac-Man played by an AI agent (CS188.1x) ([URL](https://www.youtube.com/watch?v=zHRlCSUe0Q0))
+
+## RECURSOS
+A lo largo del proyecto hemos utilizado los siguientes **recursos** para la creación del agente inteligente Pacman:
+
 #### Wikipedia
++ Agente inteligente ([URL](https://en.wikipedia.org/wiki/Intelligent_agent))
 + Pacman ([URL](https://es.wikipedia.org/wiki/Pac-Man))  
 + A\* ([URL](https://en.wikipedia.org/wiki/A*_search_algorithm))    
 + Árbol de comportamiento ([URL](https://en.wikipedia.org/wiki/Behavior_tree_(artificial_intelligence,_robotics_and_control))
 + Tablas de Persepción-Acción
+([URL](https://en.wikipedia.org/wiki/Intelligent_agent#Simple_reflex_agents))
 
 
-#### OnLine
-+ MS. Pacman
-
-#### Vídeos
-+ https://www.youtube.com/watch?v=46hjf_x_0VU  
-+ https://www.youtube.com/watch?v=yfsMHtmGDKEm  
-+ https://github.com/MazeSolver/MazeSolver
-
-## RECURSOS
-A lo largo del proyecto hemos utilizado los siguientes **recursos** para la creación del agente inteligente Pacman:
+#### Lenguajes, plataformas y librerías
 + C# ([URL](https://msdn.microsoft.com/es-es/library/kx37x362.aspx))
 + UNITY ([URL](https://unity3d.com/es))
 + BEHAVE ([URL](https://www.assetstore.unity3d.com/en/#!/content/10912))
-+ Material audiovisual propios del juego original.
+
+#### Material utilizado
   + Sprites ![URL](images/sprite.PNG)
 
 ## TECNOLOGÍAS DE IA
@@ -112,11 +122,17 @@ En el proyecto implementamos **varias arquitecturas** de agente de IA:
 + Árbol de comportamiento
 
 ## DESARROLLO
+#### Lista de tareas y cronograma
+![URL](images/crono.PNG)
+![URL](images/crono2.PNG)
+
+## ESTADO ACTUAL
+Fase Final. Entregado!
 
 ## PROBLEMAS ENCONTRADOS
 A lo largo del proyecto nos hemos topado con **diferentes problemas,** entre los cuales destacamos:
-+ Dificultades con la idea general planteada.
-+ Implementación desde 0 del juego Pacman.
++ Dificultades con la idea general planteada en el comienzo.
++ Implementación desde cero del juego Pacman.
 + Aprendizaje de librerias externas.
 + Tiempo limitado.
 
@@ -126,7 +142,7 @@ Hemos detectado **varias limitaciones** que corregiremos en un futuro implement�
 + Implementación de píldoras de poder.
 + Implementación de varios niveles.
 + Implementación de fantasmas inteligentes.
-+ Mejorar los algoritmos para que perciban mejor a los fantasmas.
++ Mejorar los algoritmos para que Pacman perciba mejor a los fantasmas.
 + Implementar un árbol de comportamiento más complejo.
 + Añadir los sonidos típicos del juego.
 
