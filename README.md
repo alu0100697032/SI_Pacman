@@ -25,7 +25,7 @@ Definimos un agente inteligente `PacMan` que intentará resolver el laberinto de
 
 Se ha dicho que siempre es posible obtener **"una programación bien adquirida"** para conseguir un **"objetivo",** por ello intentamos contemplar este paradigma a traves de la posibilidad de establecer uno movimientos iniciales con los que sabemos que el pacman alcanzará la victoria.
 
-
+A traves de una programacion adquirida se pretende conseguir el objetivo.
 
 #### **PACMAN basado en una tabla de Percepción-Acción:**
 ![](pacman2.JPG)
@@ -63,6 +63,7 @@ Definimos un agente inteligente `PacMan` que reemplazará al ser humano reproduc
 
 Definimos un agente inteligente `PacMan` que simula un comportamiento simple mediante un árbol de comportamiento.
 
+LEFT DOWN RIGHT UP DOWN RIGHT UP DOWN
 
 > En 1999 el jugador **Billy Mitchell realizó una partida perfecta de Pac-Man,** entendiéndose como tal una partida en la que el jugador completo los 255 niveles con la puntuación máxima sin ser capturado ni una sola vez. La puntuación máxima es de 3.333.360 puntos.
 
@@ -92,16 +93,17 @@ https://github.com/MazeSolver/MazeSolver
 
 
 
-## Tecnologías de IA
-* Pre-programación.
-* Tablas de Persepción-Acción.
-* A*.
-* Árbol de comportamiento.
+## TECNOLOGÍAS DE IA
+En el proyecto implementamos varias arquitecturas de agente de IA:
++ Pre-programación o programación adquirida inicial
++ Tablas de Persepción-Acción
++ A*
++ Árbol de comportamiento
 
 ## Desarrollo
 
-## Problemas encontrados
-A lo largo del proyecto nos hemos topado con diferentes problemas, entre los cuales destacamos:
+## PROBLEMAS ENCONTRADOS
+A lo largo del proyecto nos hemos topado con **diferentes problemas,** entre los cuales destacamos:
 + Dificultades con la idea general planteada.
 + Implementación desde 0 del juego Pacman.
 + Aprendizaje de librerias externas.
@@ -109,6 +111,7 @@ A lo largo del proyecto nos hemos topado con diferentes problemas, entre los cua
 
 
 ## POSIBLES MEJORAS
+Hemos detectado **varias limitaciones** que corregiremos en un futuro implementándolas:
 + Implementación de píldoras de poder.
 + Implementación de varios niveles.
 + Implementación de fantasmas inteligentes.
@@ -116,8 +119,20 @@ A lo largo del proyecto nos hemos topado con diferentes problemas, entre los cua
 + Implementar un árbol de comportamiento más complejo.
 + Añadir los sonidos típicos del juego.
 
-## Funcionamiento
-Tenemos un archivo ejecutable para Windows con el cual el usuario lo podrá ejecutar.
+## FUNCIONAMIENTO
+Tenemos un archivo ejecutable (**test1.EXE**) para Windows con el cual el usuario lo podrá ejecutar.
 
-## Conclusiones
-En líneas generales hemos cumplido el objetivo y hemos llegado a crear un pacman inteligente.
+A traves de este ejecutaremos el programa y dispondremos para cada arquitectura del agente implementada los botones **START, STOP y RESET:**
+
++ **START:** ejecuta la simulación de la arquitectura planteada.
++ **STOP:** para la simulación de la arquitectura planteada.
++ **RESET:** reinicia la simulación de la arquitectura planteada.
+
+Para las arquitecturas "Moves Secuence Pacman" y "Perseption-Action Pacman" **disponemos de una entrada de datos para su configuración de movimientos** según arquitectura.
+
+Con esto disponemos de las herramientas necesarias para ver las diferentes implementaciones de los agentes programados.
+
+
+
+## CONCLUSIONES
+En líneas generales hemos cumplido el objetivo y hemos llegado a crear un pacman inteligente mediante las diferentes arquitecturas expuestas en este informe.
