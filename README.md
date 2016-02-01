@@ -1,21 +1,28 @@
-# PACMAN Agent Intelligent
+# PACMAN Intelligent Agent
 
 Este proyecto ha sido desarrollado para la asignatura de **Sistemas Inteligentes** del itinerario de computación del **_Grado en Ingeniería Informática_** de la **ULL**.
 
-### Miembros del grupo
-Paz Méndez, Germán  
-Hernández Pérez, Víctor
+## MIEMBROS DEL GRUPO
+Paz Méndez, Germán  ([alu0100503647@ull.edu.es]())  
+Hernández Pérez, Víctor ([alu0100503647@ull.edu.es]())
 
-## Propuesta
-Elaboración de un agente inteligente para el juego de Ms. Pac-Man utilizando diferentes paradigmas inteligentes o de aprendizaje.
+## INTRODUCCIÓN
+En este documento se recogen todos los aspectos  descríptivos de desarrollo e implementación del proyecto final propuesto para la asignatura Sistemas inteligentes, desarrollado
+a lo largo de todo el curso de la asignatura.
+
+
+## DESCRIPCIÓN
+
+Elaboración de un **agente inteligente** para el juego de PacMan utilizando diferentes paradigmas inteligentes.
 
 >   
-** PacMan ** es un conocido juego en tiempo real que ofrece una interesante plataforma para la investigación.   
+** PacMan ** es un conocido juego en tiempo real que ofrece una interesante plataforma para la investigación.  
 
-## Descripción
+#### **PACMAN basado en una Secuencia de movimientos:**  
+![](pacman1.JPG)
 
-+ **PACMAN basado en una Secuencia de movimientos,**
-  * Definimos un agente inteligente `PacMan` que intentará resolver el laberinto de una manera pre-programada.
+
+  * Definimos un agente inteligente `PacMan` que intentará resolver el laberinto de una manera pre-programada antes de que se inicie el juego. Para ello le indicaremos una secuencia de movimientos que deberá seguir para completar el nivel.
 
 + **PACMAN basado en una tabla de Percepción-Acción,**
   * Definimos un agente inteligente `PacMan` que intentará resolver el laberinto de una manera pre-programada.
@@ -24,11 +31,7 @@ Elaboración de un agente inteligente para el juego de Ms. Pac-Man utilizando di
  * Definimos un agente inteligente `PacMan` que reemplazará al ser humano reproduciendo una simplicada versión de juego. El único objetivo será perseguir las bolas de poder.
 
 
-+ **PACMAN basado en reglas,**
- * Definimos un agente inteligente `PacMan` basado en reglas. Este representará una estrategia dinámica para el juego en lugar de un método de resolución de laberinto pre-programada.
-
-
-+ **PACMAN basado en una red neuronal,**
++ **PACMAN basado en un arbol de comportamiento,**
  * Definimos un agente inteligente `PacMan` adaptativo que "aprende" a traves de un aprendizaje gradual basado en una bateria de test previos para ajustar los parámetros del agente.
 
 
@@ -48,16 +51,22 @@ https://www.youtube.com/watch?v=46hjf_x_0VU
 https://www.youtube.com/watch?v=yfsMHtmGDKEm
 https://github.com/MazeSolver/MazeSolver
 
-## Recursos a usar
+## RECURSOS
++ https://es.wikipedia.org/wiki/Pac-Man
++
 Imágenes y sonidos propios del juego original.
 Programación en Java, Inteligencia Artificial, Minería de Datos.
+- BEHAVE
+
+
+
+
 
 ## Tecnologías de IA
-* A*
-* Red Neuronal Artificial
-* Conocimiento basado en reglas
-* Pre-programación
-* Q-Learning
+* Pre-programación.
+* Tablas de Persepción-Acción.
+* A*.
+* Árbol de comportamiento.
 
 ## Desarrollo
 
