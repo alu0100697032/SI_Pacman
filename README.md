@@ -1,39 +1,38 @@
 # PACMAN Intelligent Agent
 
-Este proyecto ha sido desarrollado para la asignatura de **Sistemas Inteligentes** del itinerario de computación del **_Grado en Ingeniería Informática_** de la **ULL**.
+Este proyecto ha sido desarrollado para la asignatura de **Sistemas Inteligentes** del itinerario de computación del **_Grado en Ingeniería Informática_** de la **ULL**.  
+
+![](images/pacman.JPG)
 
 ## MIEMBROS DEL GRUPO
 Paz Méndez, Germán  ([alu0100503647@ull.edu.es]())  
 Hernández Pérez, Víctor ([alu0100697032@ull.edu.es]())
 
 ## INTRODUCCIÓN
-En este documento se recogen todos los aspectos  descríptivos de desarrollo e implementación del proyecto final propuesto para la asignatura Sistemas inteligentes desarrollado
-a lo largo de todo el curso.
+En este documento se recogen todos los aspectos  descríptivos del desarrollo e implementación del proyecto final propuesto para la asignatura Sistemas inteligentes.
 
 
 ## DESCRIPCIÓN
 
-Elaboración de varios **agentes inteligentes** para el juego de PacMan utilizando diferentes arquitecturas inteligentes.
+El proyecto ha consistido en la elaboración de varios **agentes inteligentes** para el juego de PacMan utilizando diferentes arquitecturas inteligentes.
 
->   
-** PacMan ** es un conocido juego en tiempo real que ofrece una interesante plataforma para la investigación.  
+> **NOTA:  PacMan ** es un conocido juego en tiempo real que ofrece una interesante plataforma para la investigación y el desarrollo de la IA.  
 
 #### **PACMAN basado en una Secuencia de movimientos:**  
 ![](images/pacman1.JPG)
 
 Definimos un agente inteligente `PacMan` que intentará resolver el laberinto de una manera pre-programada antes de que se inicie el juego. Para ello le indicaremos una secuencia de movimientos que deberá seguir para completar el nivel.
 
-Se ha dicho que siempre es posible obtener **"una programación bien adquirida"** para conseguir un **"objetivo",** por ello intentamos contemplar este paradigma a traves de la posibilidad de establecer uno movimientos iniciales con los que sabemos que el pacman alcanzará la victoria.
+Establecemos la posibilidad de que el agente obtenga **"una programación bien adquirida"** para conseguir un **"objetivo perseguido",** por ello intentamos contemplar este paradigma a traves de la posibilidad de establecer unos movimientos iniciales con los que sabemos que el pacman alcanzará la victoria.
 
-A traves de una programacion adquirida se pretende conseguir el objetivo.
 
 #### **PACMAN basado en una tabla de Percepción-Acción:**
 ![](images/pacman2.JPG)
 
-Definimos un agente inteligente `PacMan` de reflejo simple que intentará superar el nivel actuando según lo que encuentre a su alrededor. Para ello utilizaremos una tabla de persepción acción como a continuación:    
+Definimos un agente inteligente `PacMan` de reflejo simple que intentará superar el nivel actuando según las percepciones de objetos o fantasmas que encuentre a su alrededor. Para ello utilizaremos una tabla de Percepción-Acción como la siguiente:    
 
 
-| UP | RIGHT | DOWN | LEFT | ACTION |
+| UP | RIGHT | DOWN | LEFT | PERCEPTION / ACTION |
 |:------:|:------:|:------:|:------:|:------:|
 | WALL | WALL | WALL | WALL  | **STOP**   |
 | WALL | WALL | WALL | PILL  | **LEFT**   |
@@ -47,13 +46,17 @@ Definimos un agente inteligente `PacMan` de reflejo simple que intentará supera
 | WALL | WALL | PILL | PILL  | **UP**   |
 | WALL | WALL | PILL | PILL  | **UP**   |
 
-Un inconveniente típico de este sistema es que la tabla puede ser enorme y difícil de construir.
+> **NOTA:** Un inconveniente típico de este sistema es que la tabla puede ser enorme y difícil de construir si establecemos muchas percepciones posibles, por ello hemos añadido a WALL la percepción de los fantasmas y a PILL los espacios vacíos reduciendo así el tamaño de la misma.
 
 ####  **PACMAN basado en el algoritmo A*:**
 ![](images/pacman3.JPG)
 
 
-Definimos un agente inteligente `PacMan` que reemplazará al ser humano reproduciendo una simplicada versión deL juego. El único objetivo será perseguir las píldoras. Para ello hará uso del A* para perseguir la más cercana. Además si el fantasma se cruza en la trayectoria del pacman este cambiará la trayectoria.
+Definimos un agente inteligente `PacMan` que utilizará el algoritmo de A*, siendo este el más conocido en juegos para encontrar la ruta optima.
+
+> **NOTA:** EL primer juego en utilizar el A* fue el Pacman, aunque en este caso eran los fantasmitas los que lo implementaban.
+
+Por lo tanto el único objetivo del agente será el de perseguir las píldoras. Para ello hará uso del A*. Además si el fantasma se cruza en el camino del pacman este cambiará la trayectoria para no perder alguna de sus tres vidas.
 
 
 ####  **PACMAN basado en un arbol de comportamiento:**
@@ -63,24 +66,29 @@ Definimos un agente inteligente `PacMan` que reemplazará al ser humano reproduc
 
 Definimos un agente inteligente `PacMan` que simula un comportamiento simple mediante un árbol de comportamiento.
 
+Esta es una de las técnicas que se ha venido utilizando en los últimos años para poder modelar Inteligencia artificial en videojuegos. Cada día ha ido ganando cada vez más adeptos a lo largo de los años.
 
-> En 1999 el jugador **Billy Mitchell realizó una partida perfecta de Pac-Man,** entendiéndose como tal una partida en la que el jugador completo los 255 niveles con la puntuación máxima sin ser capturado ni una sola vez. La puntuación máxima es de 3.333.360 puntos.
+Como todo lo que es representado por un árbol la visualización de lo que se pretende hacer es bastante sencillo y esto nos permite ganar en tiempo de desarrollo. En nuestro agente hemos añadido un selector y cinco acciones:
 
-Hemos establecido la posibilidad de modificar los diferentes archivos de configuración del agente inteligente Pacman. Con esto podremos determinar la mejor arquitectura para realizar una partida perfecta.
+  ![](images/pacman5.JPG)
+
+Con estás cuatro arquitecturas pretendemos obtener la máxima puntuación en el juego del Pacman.
+
+> **NOTA:** En 1999 el jugador **Billy Mitchell realizó una partida perfecta de Pac-Man,** entendiéndose como tal una partida en la que el jugador completo los 255 niveles con la puntuación máxima sin ser capturado ni una sola vez. La puntuación máxima es de 3.333.360 puntos.
+
+Hemos establecido la posibilidad de modificar los diferentes archivos de configuración de varios agentes inteligentes Pacman. Con esto podremos determinar la mejor arquitectura para realizar una partida perfecta.
 
 
 ## PROYECTOS SIMILARES
 
-
-
 #### Wikipedia
 + Pacman ([URL](https://es.wikipedia.org/wiki/Pac-Man))  
 + A\* ([URL](https://en.wikipedia.org/wiki/A*_search_algorithm))    
-+ Árbol de comportamiento
++ Árbol de comportamiento ([URL](https://en.wikipedia.org/wiki/Behavior_tree_(artificial_intelligence,_robotics_and_control))
 + Tablas de Persepción-Acción
 
 
-#### Proyectos
+#### OnLine
 + MS. Pacman
 
 #### Vídeos
