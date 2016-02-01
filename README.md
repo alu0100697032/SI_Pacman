@@ -7,19 +7,19 @@ Paz Méndez, Germán  ([alu0100503647@ull.edu.es]())
 Hernández Pérez, Víctor ([alu0100697032@ull.edu.es]())
 
 ## INTRODUCCIÓN
-En este documento se recogen todos los aspectos  descríptivos de desarrollo e implementación del proyecto final propuesto para la asignatura Sistemas inteligentes, desarrollado
+En este documento se recogen todos los aspectos  descríptivos de desarrollo e implementación del proyecto final propuesto para la asignatura Sistemas inteligentes desarrollado
 a lo largo de todo el curso.
 
 
 ## DESCRIPCIÓN
 
-Elaboración de un **agente inteligente** para el juego de PacMan utilizando diferentes paradigmas inteligentes.
+Elaboración de varios **agentes inteligentes** para el juego de PacMan utilizando diferentes arquitecturas inteligentes.
 
 >   
 ** PacMan ** es un conocido juego en tiempo real que ofrece una interesante plataforma para la investigación.  
 
 #### **PACMAN basado en una Secuencia de movimientos:**  
-![](pacman1.JPG)
+![](images/pacman1.JPG)
 
 Definimos un agente inteligente `PacMan` que intentará resolver el laberinto de una manera pre-programada antes de que se inicie el juego. Para ello le indicaremos una secuencia de movimientos que deberá seguir para completar el nivel.
 
@@ -28,7 +28,7 @@ Se ha dicho que siempre es posible obtener **"una programación bien adquirida"*
 A traves de una programacion adquirida se pretende conseguir el objetivo.
 
 #### **PACMAN basado en una tabla de Percepción-Acción:**
-![](pacman2.JPG)
+![](images/pacman2.JPG)
 
 Definimos un agente inteligente `PacMan` de reflejo simple que intentará superar el nivel actuando según lo que encuentre a su alrededor. Para ello utilizaremos una tabla de persepción acción como a continuación:    
 
@@ -50,7 +50,7 @@ Definimos un agente inteligente `PacMan` de reflejo simple que intentará supera
 Un inconveniente típico de este sistema es que la tabla puede ser enorme y difícil de construir.
 
 ####  **PACMAN basado en el algoritmo A*:**
-![](pacman3.JPG)
+![](images/pacman3.JPG)
 
 
 Definimos un agente inteligente `PacMan` que reemplazará al ser humano reproduciendo una simplicada versión deL juego. El único objetivo será perseguir las píldoras. Para ello hará uso del A* para perseguir la más cercana. Además si el fantasma se cruza en la trayectoria del pacman este cambiará la trayectoria.
@@ -58,12 +58,11 @@ Definimos un agente inteligente `PacMan` que reemplazará al ser humano reproduc
 
 ####  **PACMAN basado en un arbol de comportamiento:**
 
-  ![](pacman4.JPG)
+  ![](images/pacman4.JPG)
 
 
 Definimos un agente inteligente `PacMan` que simula un comportamiento simple mediante un árbol de comportamiento.
 
-LEFT DOWN RIGHT UP DOWN RIGHT UP DOWN
 
 > En 1999 el jugador **Billy Mitchell realizó una partida perfecta de Pac-Man,** entendiéndose como tal una partida en la que el jugador completo los 255 niveles con la puntuación máxima sin ser capturado ni una sola vez. La puntuación máxima es de 3.333.360 puntos.
 
@@ -71,36 +70,40 @@ Hemos establecido la posibilidad de modificar los diferentes archivos de configu
 
 
 ## PROYECTOS SIMILARES
-MS. Pacman
+
 
 
 #### Wikipedia
- https://es.wikipedia.org/wiki/Pac-Man
++ Pacman ([URL](https://es.wikipedia.org/wiki/Pac-Man))  
++ A\* ([URL](https://en.wikipedia.org/wiki/A*_search_algorithm))    
++ Árbol de comportamiento
++ Tablas de Persepción-Acción
+
+
 #### Proyectos
++ MS. Pacman
+
 #### Vídeos
-https://www.youtube.com/watch?v=46hjf_x_0VU  
-https://www.youtube.com/watch?v=yfsMHtmGDKEm  
-https://github.com/MazeSolver/MazeSolver
++ https://www.youtube.com/watch?v=46hjf_x_0VU  
++ https://www.youtube.com/watch?v=yfsMHtmGDKEm  
++ https://github.com/MazeSolver/MazeSolver
 
 ## RECURSOS
-+ C#
-+ UNITY
-+ BEHAVE
+A lo largo del proyecto hemos utilizado los siguientes **recursos** para la creación del agente inteligente Pacman:
++ C# ([URL](https://msdn.microsoft.com/es-es/library/kx37x362.aspx))
++ UNITY ([URL](https://unity3d.com/es))
++ BEHAVE ([URL](https://www.assetstore.unity3d.com/en/#!/content/10912))
 + Material audiovisual propios del juego original.
-
-
-
-
-
+  + Sprites ![URL](images/sprite.PNG)
 
 ## TECNOLOGÍAS DE IA
-En el proyecto implementamos varias arquitecturas de agente de IA:
-+ Pre-programación o programación adquirida inicial
+En el proyecto implementamos **varias arquitecturas** de agente de IA:
++ Pre-programación o programación adquirida inicialmente
 + Tablas de Persepción-Acción
 + A*
 + Árbol de comportamiento
 
-## Desarrollo
+## DESARROLLO
 
 ## PROBLEMAS ENCONTRADOS
 A lo largo del proyecto nos hemos topado con **diferentes problemas,** entre los cuales destacamos:
