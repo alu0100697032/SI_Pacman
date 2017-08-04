@@ -7,8 +7,8 @@ Este proyecto ha sido desarrollado para la asignatura de **Sistemas Inteligentes
 ![](images/pacman.JPG)
 
 ## MIEMBROS DEL GRUPO
-Paz Méndez, Germán  ([alu0100503647@ull.edu.es]())  
-Hernández Pérez, Víctor ([alu0100697032@ull.edu.es]())
+Paz Méndez, Germán   
+Hernández Pérez, Víctor
 
 ## INTRODUCCIÓN
 En este documento se recogen todos los aspectos  descríptivos del desarrollo e implementación del proyecto final propuesto para la asignatura Sistemas inteligentes.
